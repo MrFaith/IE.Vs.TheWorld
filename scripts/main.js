@@ -2,6 +2,11 @@
     // Parameters: width of the game, height of the game, how to render the game, the HTML div that will contain the game
     var game = new Phaser.Game(500, 600, Phaser.AUTO, 'game_div');
 
+    //Globales qui nous seront nécéssaires
+        var cursors;
+        var fireButton;
+        var player;
+
     // And now we define our first and only state, I'll call it 'main'. A state is a specific scene of a game like a menu, a game over screen, etc. => donc on aura probablement besoin de 6 ou 7 states (1 par niveau, menu, scores, etc...)
     var main_state = {
 
@@ -11,7 +16,7 @@
             // Change the background color of the game
             game.stage.backgroundColor = '#71c5cf';
 
-            game.load.image('IE', 'assets/ie1.png');  
+            game.load.image('player', 'assets/ie1.png');  
         },
 
         create: function() { 
@@ -20,23 +25,15 @@
 
             // Affiche un sprite sur l'écran
             // Parametres: x position, y position, nom du sprite
-            this.ie_sprite = game.add.sprite(220, 500, 'IE');  
+            this.player = game.add.sprite(10, 500, 'player');  
 
             // Add gravity to the enemies (pour donner l'impression que l'on avance)
-            game.physics.arcade.enable(this.ie_sprite);
+            game.physics.arcade.enable(this.player);
             //this.ie_sprite.body.gravity.y = 1000;  
 
-            // Fonction mouuuuve left quand on appuie sur la touche gauche
-            var leftKey = this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
-            leftKey.onDown.add(this.moveLeft, this);  
-
-            // Fonction move Right
-            var rightKey = this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
-            rightKey.onDown.add(this.moveRight, this);
-
-            // Fonction move Right
-            var spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-            spaceKey.onDown.add(this.shoot, this);    
+            //  On ajoute nos touches d'actions (voir pour les modules)
+            cursors = game.input.keyboard.createCursorKeys();
+            fireButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         },
 
         update: function() {
@@ -44,18 +41,36 @@
 
             // Test rotation
             //this.ie_sprite.angle += 15; 
+            //  Scroll the background !!! à voir 
+            //starfield.tilePosition.y += 2;
+            //  Reset the player, then check for movement keys
+            this.player.body.velocity.setTo(0, 0);
+            if (cursors.left.isDown && this.player.body.x > 20)
+            {
+                this.player.body.velocity.x = -450;
+            }
+            else if (cursors.right.isDown && this.player.body.x < 440)
+            {
+                this.player.body.velocity.x = 450;
+            }
+
+            //  Firing?
+            if (fireButton.isDown)
+            {
+                this.shoot();
+            }
+
+            /*if (game.time.now > firingTimer)
+            {
+                enemyFires();
+            }*/
+
+            //  Collisions !!!
+            /*game.physics.arcade.overlap(bullets, aliens, collisionHandler, null, this);
+            game.physics.arcade.overlap(enemyBullets, player, enemyHitsPlayer, null, this);*/
 
         },
 
-        moveLeft: function() {  
-            // Add a vertical velocity to the bird
-            this.ie_sprite.body.velocity.x = -350;
-        },
-
-        moveRight: function() {  
-            // Add a vertical velocity to the bird
-            this.ie_sprite.body.velocity.x = +350;
-        },
 
         shoot: function() {  
             // Add a vertical velocity to the bird
