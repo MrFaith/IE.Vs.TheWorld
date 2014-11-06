@@ -52,6 +52,7 @@
             else if (cursors.right.isDown && this.player.body.x < 440)
             {
                 this.player.body.velocity.x = 450;
+                //functionTest(this.player);
             }
 
             //  Firing?
