@@ -58,7 +58,8 @@
             //  Firing?
             if (fireButton.isDown)
             {
-                this.shoot();
+                //this.shoot();
+                shoot(this.player);
             }
 
             /*if (game.time.now > firingTimer)
@@ -73,11 +74,11 @@
         },
 
 
-        shoot: function() {  
+        /*shoot: function() {  
             // Add a vertical velocity to the bird
             //this.ie_sprite.body.velocity.y = -350;
             console.log("Bam !");
-        }
+        }*/
 
     }
     // And finally we tell Phaser to add and start our 'main' state
