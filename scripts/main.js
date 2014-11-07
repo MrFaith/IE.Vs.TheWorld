@@ -21,8 +21,8 @@
             game.stage.backgroundColor = '#000';
 
             game.load.image('player', 'assets/ie1.png'); //IE 
-            game.load.image('bullets', 'assets/bullet1.png')
-
+            game.load.image('bullets', 'assets/bullet1.png'); //Tir simple
+            game.load.image('laser', 'assets/laser.png'); //Tir simple
             
         },
 
