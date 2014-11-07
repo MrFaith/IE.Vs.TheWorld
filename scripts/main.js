@@ -1,11 +1,14 @@
 // We start by initializing Phaser
     // Parameters: width of the game, height of the game, how to render the game, the HTML div that will contain the game
-    var game = new Phaser.Game(500, 600, Phaser.AUTO, 'game_div');
+    var game = new Phaser.Game(750, 800, Phaser.AUTO, 'game_div');
 
     //Globales qui nous seront nécéssaires
         var cursors;
         var fireButton;
         var player;
+
+        //ennemies
+        var bookmarks;
 
         var bullets;
         var bulletsAvailable = true; // Va nous permettre de savoir si le joueur peut tirer
@@ -21,6 +24,7 @@
             game.stage.backgroundColor = '#000';
 
             game.load.image('player', 'assets/ie1.png'); //IE 
+            game.load.image('bookmarks', 'assets/favoris.png') //Ennemy Favoris
             game.load.image('bullets', 'assets/bullet1.png'); //Tir simple
             game.load.image('laser', 'assets/laser.png'); //Tir simple
             
@@ -32,7 +36,15 @@
 
             // Affiche un sprite sur l'écran
             // Parametres: x position, y position, nom du sprite
-            player = game.add.sprite(10, 500, 'player');  
+            player = game.add.sprite(375, 700, 'player');  
+
+            //Groupe de favoris
+            bookmarks = game.add.group(200, 200, 'bookmarks');
+            bookmarks.enableBody = true;
+            bookmarks.createMultiple(20, 'bookmarks');
+
+            //création instance bookmark
+            creationVagueBookmark(bookmarks);
 
             // Add gravity to the enemies (pour donner l'impression que l'on avance)
             game.physics.arcade.enable(player);
@@ -42,11 +54,6 @@
                 bullets = game.add.group();
                 bullets.enableBody = true;
                 bullets.createMultiple(30, 'bullets');
-                bullets.setAll('anchor.x', 0.5);
-                bullets.setAll('anchor.y', 1);
-                bullets.setAll('outOfBoundsKill', true);
-                bullets.setAll('checkWorldBounds', true); 
-
 
 
             //  On ajoute nos touches d'actions (voir pour les modules)
@@ -67,7 +74,7 @@
             {
                 player.body.velocity.x = -450;
             }
-            else if (cursors.right.isDown && player.body.x < 440)
+            else if (cursors.right.isDown && player.body.x < 690)
             {
                 player.body.velocity.x = 450;
                 //functionTest(this.player);
@@ -78,6 +85,9 @@
             {
                 shoot(player);
             }
+
+            //Déplacement des ennemis (bookmark)
+            //deplacementBookmark(bookmarks);
 
             /*if (game.time.now > firingTimer)
             {
