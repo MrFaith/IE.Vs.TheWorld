@@ -18,4 +18,5 @@ function game_over() {
 
 	bookmarks.destroy();
 	bullets.destroy();
+	iebg.kill();
 }
