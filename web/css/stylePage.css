@@ -1,0 +1,13 @@
+html{
+	background: #C2E5F2;
+}
+
+body{
+	padding:30px;
+}
+
+#game_div{
+	border: 1px solid rgb(150,150,150);
+	margin: auto;
+	width:750px;
+}
