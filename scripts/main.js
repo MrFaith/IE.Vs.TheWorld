@@ -6,6 +6,11 @@
         var cursors;
         var fireButton;
         var player;
+        var score = 0;
+        var displayScore = "Score : ";
+        var getScore;
+
+        var gameOver;
 
         //ennemies
         var bookmarks;
@@ -21,12 +26,14 @@
             // Everything in this function will be executed at the beginning. That’s where we usually load the game’s assets (images, sounds, etc.)
             
             
-            game.stage.backgroundColor = '#000';
+            game.stage.backgroundColor = '#fff';
 
             game.load.image('player', 'assets/ie1.png'); //IE 
             game.load.image('bookmarks', 'assets/favoris.png') //Ennemy Favoris
             game.load.image('bullets', 'assets/bullet1.png'); //Tir simple
             game.load.image('laser', 'assets/laser.png'); //Tir simple
+
+            game.load.image('gameOver', 'assets/game_over.png');
             
         },
 
@@ -41,7 +48,7 @@
             //Groupe de favoris
             bookmarks = game.add.group(200, 200, 'bookmarks');
             bookmarks.enableBody = true;
-            bookmarks.createMultiple(20, 'bookmarks');
+            bookmarks.createMultiple(200, 'bookmarks');
 
             //création instance bookmark
             creationVagueBookmark(bookmarks);
@@ -55,6 +62,8 @@
                 bullets.enableBody = true;
                 bullets.createMultiple(30, 'bullets');
 
+            var style = { fill: "#FF0000", font: "20px Arial"};
+            getScore = game.add.text(600, 760, displayScore+score, style);
 
             //  On ajoute nos touches d'actions (voir pour les modules)
             cursors = game.input.keyboard.createCursorKeys();
@@ -95,8 +104,8 @@
             }*/
 
             //  Collisions !!!
-            /*game.physics.arcade.overlap(bullets, aliens, collisionHandler, null, this);
-            game.physics.arcade.overlap(enemyBullets, player, enemyHitsPlayer, null, this);*/
+            game.physics.arcade.overlap(bullets, bookmarks, killBookmarks, null, this);
+            game.physics.arcade.overlap(bookmarks, player, enemyHitsPlayer, null, this);
 
         },
 
