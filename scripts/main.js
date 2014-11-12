@@ -5,6 +5,8 @@
     //Globales qui nous seront nécéssaires
         var cursors;
         var fireButton;
+        var resetButton;
+
         var player;
         var score = 0;
         var displayScore = "Score : ";
@@ -12,6 +14,7 @@
 
         var gameOver;
         var iebg;
+        var operabg;
 
         //ennemies
         var bookmarks;
@@ -30,12 +33,13 @@
             game.stage.backgroundColor = '#fff';
 
             game.load.image('player', 'assets/ie1.png'); //IE 
-            game.load.image('bookmarks', 'assets/favoris.png') //Ennemy Favoris
+            game.load.image('bookmarks', 'assets/enemies/opera/bookmark.png') //Ennemy Favoris
             game.load.image('bullets', 'assets/bullet1.png'); //Tir simple
             game.load.image('laser', 'assets/laser.png'); //Tir simple
 
             game.load.image('gameOver', 'assets/game_over.png');
-            game.load.image('iebg', 'assets/ieBackground.jpg');
+            game.load.image('iebg', 'assets/background/ie/ie95Background.png');
+            game.load.image('operabg', 'assets/background/operaBackground.png');
         },
 
         create: function() { 
@@ -44,10 +48,12 @@
 
             // Affiche un sprite sur l'écran
             // Parametres: x position, y position, nom du sprite
-            player = game.add.sprite(375, 670, 'player');  
+            player = game.add.sprite(375, 655, 'player');  
 
             //Background IE
-            iebg = game.add.sprite(-5, 700, 'iebg');
+            iebg = game.add.sprite(0, 685, 'iebg');
+            // Background Opera
+            operabg = game.add.sprite(0, 0, 'operabg');
 
             //Groupe de favoris
             bookmarks = game.add.group(200, 200, 'bookmarks');
@@ -59,8 +65,7 @@
 
             // Add gravity to the enemies (pour donner l'impression que l'on avance)
             game.physics.arcade.enable(iebg);
-            game.physics.arcade.enable(player);
-            //this.ie_sprite.body.gravity.y = 1000;  
+            game.physics.arcade.enable(player); 
 
             //Initialisation de nos tirs de niveau 1 
                 bullets = game.add.group();
@@ -68,21 +73,17 @@
                 bullets.createMultiple(30, 'bullets');
 
             var style = { fill: "#FF0000", font: "20px Arial"};
-            getScore = game.add.text(600, 760, displayScore+score, style);
+            getScore = game.add.text(600, 740, displayScore+score, style);
 
             //  On ajoute nos touches d'actions (voir pour les modules)
             cursors = game.input.keyboard.createCursorKeys();
             fireButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+            resetButton = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
         },
 
         update: function() {
             // This is where we will spend the most of our time. This function is called 60 times per second to update the game.
 
-            // Test rotation
-            //this.ie_sprite.angle += 15; 
-            //  Scroll the background !!! à voir 
-            //starfield.tilePosition.y += 2;
-            //  Reset the player, then check for movement keys
             player.body.velocity.setTo(0, 0);
             if (cursors.left.isDown && player.body.x > 20)
             {
@@ -91,7 +92,6 @@
             else if (cursors.right.isDown && player.body.x < 690)
             {
                 player.body.velocity.x = 450;
-                //functionTest(this.player);
             }
 
             //  Firing?
@@ -100,13 +100,11 @@
                 shoot(player);
             }
 
-            //Déplacement des ennemis (bookmark)
-            //deplacementBookmark(bookmarks);
-
-            /*if (game.time.now > firingTimer)
+            // Reset du jeu
+            if (resetButton.isDown)
             {
-                enemyFires();
-            }*/
+                gameRestart();
+            }
 
             //  Collisions !!!
             game.physics.arcade.overlap(bullets, bookmarks, killBookmarks, null, this);
@@ -114,13 +112,6 @@
             game.physics.arcade.overlap(iebg, bookmarks, enemyHits, null, this);
 
         },
-
-
-        /*shoot: function() {  
-            // Add a vertical velocity to the bird
-            //this.ie_sprite.body.velocity.y = -350;
-            console.log("Bam !");
-        }*/
 
     }
     // And finally we tell Phaser to add and start our 'main' state

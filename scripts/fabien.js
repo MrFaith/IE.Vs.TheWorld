@@ -1,3 +1,5 @@
+var bookmarkboucle;
+
 function creationVagueBookmark(bookmarks) {
 
 	//Pour l'instant une seule création
@@ -10,11 +12,9 @@ function creationVagueBookmark(bookmarks) {
 }
 
 function deplacementBookmark(cpt) {
-	setTimeout( function(){
+	bookmarkboucle = this.game.time.events.add(600, function() {
 		if(cpt > 0) {
-			//console.log('kgro');
 			var randomNumber = Math.floor((Math.random() * 600) + 30);
-			//console.log(randomNumber);
 
             var bookmark = bookmarks.create(randomNumber, -5, 'bookmarks');
 			bookmark.anchor.setTo(0.5, 0.5);
@@ -22,5 +22,14 @@ function deplacementBookmark(cpt) {
 			cpt--;
 			deplacementBookmark(cpt);
 		}
-    }, 500);
+    }, this);
+}
+
+function gameRestart() {
+	/*bullets.destroy();*/
+    bookmarks.destroy();
+    score = 0;
+    //Arreter boucle de bookmark
+	//bookmarkboucle.destroy();
+    game.state.restart(true);
 }
