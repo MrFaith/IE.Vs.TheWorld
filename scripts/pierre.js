@@ -6,7 +6,7 @@ function killBookmarks(bullet, bookmark) {
 	getScore.setText(displayScore + score);
 }
 
-function enemyHitsPlayer(player, enemy) {
+function enemyHits(something, enemy) {
 	player.kill();
 	enemy.kill();
 

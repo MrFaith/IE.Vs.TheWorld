@@ -18,9 +18,9 @@ function deplacementBookmark(cpt) {
 
             var bookmark = bookmarks.create(randomNumber, -5, 'bookmarks');
 			bookmark.anchor.setTo(0.5, 0.5);
-			bookmark.body.velocity.y = 200;
+			bookmark.body.velocity.y = 140;
 			cpt--;
 			deplacementBookmark(cpt);
 		}
-    }, 420);
+    }, 500);
 }

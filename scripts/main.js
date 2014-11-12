@@ -11,6 +11,7 @@
         var getScore;
 
         var gameOver;
+        var iebg;
 
         //ennemies
         var bookmarks;
@@ -34,7 +35,7 @@
             game.load.image('laser', 'assets/laser.png'); //Tir simple
 
             game.load.image('gameOver', 'assets/game_over.png');
-            
+            game.load.image('iebg', 'assets/ieBackground.jpg');
         },
 
         create: function() { 
@@ -43,7 +44,10 @@
 
             // Affiche un sprite sur l'écran
             // Parametres: x position, y position, nom du sprite
-            player = game.add.sprite(375, 700, 'player');  
+            player = game.add.sprite(375, 670, 'player');  
+
+            //Background IE
+            iebg = game.add.sprite(-5, 700, 'iebg');
 
             //Groupe de favoris
             bookmarks = game.add.group(200, 200, 'bookmarks');
@@ -54,6 +58,7 @@
             creationVagueBookmark(bookmarks);
 
             // Add gravity to the enemies (pour donner l'impression que l'on avance)
+            game.physics.arcade.enable(iebg);
             game.physics.arcade.enable(player);
             //this.ie_sprite.body.gravity.y = 1000;  
 
@@ -105,7 +110,8 @@
 
             //  Collisions !!!
             game.physics.arcade.overlap(bullets, bookmarks, killBookmarks, null, this);
-            game.physics.arcade.overlap(bookmarks, player, enemyHitsPlayer, null, this);
+            game.physics.arcade.overlap(bookmarks, player, enemyHits, null, this);
+            game.physics.arcade.overlap(iebg, bookmarks, enemyHits, null, this);
 
         },
 
