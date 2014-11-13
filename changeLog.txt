@@ -1,0 +1,8 @@
+- Creation of the main page, and the area of game.
+- First background creation
+- Creation of the player's avatar (internet explorer)
+- Addition of movement controls and simple shoot
+- First enemies creation and first wave creation
+- Collisions management
+- Game over mode
+- Creation of the scoring system
