@@ -3,9 +3,6 @@
     var game = new Phaser.Game(750, 800, Phaser.AUTO, 'game_div');
 
     //Globales qui nous seront nécéssaires
-        var cursors;
-        var fireButton;
-        var resetButton;
 
         var player;
         var score = 0;
@@ -20,8 +17,12 @@
         var bookmarks;
 
         var bullets;
-        var bulletsAvailable = true; // Va nous permettre de savoir si le joueur peut tirer
-        
+
+    //Objects
+    var varParameters = Parameters();
+    var playerObject = Player();
+    var bullets = Bullets();
+    /*var enemies = new Enemies();*/
 
     // And now we define our first and only state, I'll call it 'main'. A state is a specific scene of a game like a menu, a game over screen, etc. => donc on aura probablement besoin de 6 ou 7 states (1 par niveau, menu, scores, etc...)
     var main_state = {
@@ -34,7 +35,7 @@
 
             game.load.image('player', 'assets/ie1.png'); //IE 
             game.load.image('bookmarks', 'assets/enemies/opera/bookmark.png') //Ennemy Favoris
-            game.load.image('bullets', 'assets/bullet1.png'); //Tir simple
+            game.load.image('simpleBullets', 'assets/bullet1.png'); //Tir simple
             game.load.image('laser', 'assets/laser.png'); //Tir simple
 
             game.load.image('gameOver', 'assets/game_over.png');
@@ -68,9 +69,7 @@
             game.physics.arcade.enable(player); 
 
             //Initialisation de nos tirs de niveau 1 
-                bullets = game.add.group();
-                bullets.enableBody = true;
-                bullets.createMultiple(30, 'bullets');
+            bullets.initSimpleBullets();
 
             var style = { fill: "#FF0000", font: "20px Arial"};
             getScore = game.add.text(600, 740, displayScore+score, style);
@@ -97,19 +96,20 @@
             //  Firing?
             if (fireButton.isDown)
             {
-                shoot(player);
-            }
-
-            // Reset du jeu
-            if (resetButton.isDown)
-            {
-                gameRestart();
+                shoot(player, bullets);
             }
 
             //  Collisions !!!
             game.physics.arcade.overlap(bullets, bookmarks, killBookmarks, null, this);
             game.physics.arcade.overlap(bookmarks, player, enemyHits, null, this);
-            game.physics.arcade.overlap(iebg, bookmarks, enemyHits, null, this);
+            game.physics.arcade.overlap(bookmarks, iebg, enemyHits, null, this);
+
+            // Reset du jeu
+            if (resetButton.isDown)
+            {
+                game.paused = false;
+                gameRestart();
+            }
 
         },
 

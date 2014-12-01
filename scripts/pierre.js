@@ -6,7 +6,7 @@ function killBookmarks(bullet, bookmark) {
 	getScore.setText(displayScore + score);
 }
 
-function enemyHits(something, enemy) {
+function enemyHits(enemy, something) {
 	player.kill();
 	enemy.kill();
 
@@ -16,7 +16,9 @@ function enemyHits(something, enemy) {
 function game_over() {
 	gameOver = game.add.sprite(250, 250, 'gameOver');
 
-	bookmarks.destroy();
-	bullets.destroy();
+	bookmarks.removeAll();
+	bullets.removeAll();
 	iebg.kill();
+
+	game.paused = true;
 }

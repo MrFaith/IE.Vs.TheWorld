@@ -26,10 +26,14 @@ function deplacementBookmark(cpt) {
 }
 
 function gameRestart() {
-	/*bullets.destroy();*/
+	/*bullets.destroy();
     bookmarks.destroy();
     score = 0;
-    //Arreter boucle de bookmark
-	//bookmarkboucle.destroy();
-    game.state.restart(true);
+    game.state.remove('main'); 
+    game.state.add('main', main_state);  
+    game.state.start('main');*/
+
+    bookmarks.removeAll();
+    score = 0;
+    game.state.start('main');
 }
