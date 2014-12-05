@@ -20,7 +20,7 @@ function Bullets() {
 		},
 
 		getSimpleBullets: function(){
-			return simple_bullet;
+			return simple_bullet; 
 		}
 	};
 }
