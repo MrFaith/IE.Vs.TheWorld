@@ -6,6 +6,7 @@ function Player() {
 	//TODO : Bonus
 
 	var ie;
+	var background;
 
 	return {
 		// Getters
@@ -37,19 +38,31 @@ function Player() {
 		},
 
 		// Method
-		addSprite : function(xPos, yPos, name_sprite) {
-            ie = game.add.sprite(xPos, yPos, name_sprite); 
+		addSprite : function() {
+            ie = game.add.sprite(375, 655, 'player'); 
             game.physics.arcade.enable(ie); 
+
+            //Background IE
+            background = game.add.sprite(0, 685, 'iebg');
+            game.physics.arcade.enable(background);
+
 		},
 		position : function() {
 			xPos = ie.body.x;
 			yPos = ie.body.y;
-
 			return {'x':xPos, 'y':yPos};
+		},
+
+		getBackground : function(){
+			return background;
 		},
 
 		defineVelocity : function(x, y){
 			ie.body.velocity.setTo(x, y);
+		},
+
+		addScore : function(newScore) {
+			score += newScore;
 		}
 	};
 }

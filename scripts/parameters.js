@@ -3,6 +3,7 @@ function Parameters(){
     var cursors;
 	var fireButton;
 	var resetButton;
+	var displayScore;
 
 	return {
 
@@ -19,6 +20,10 @@ function Parameters(){
 	    	return resetButton;
 	    },
 
+	    getDisplayScore : function() {
+	    	return displayScore;
+	    },
+
 	    // SETTER
 	    setCursors : function(newCursorValue) {
 	    	cursors = newCursorValue;
@@ -30,6 +35,10 @@ function Parameters(){
 
 	    setResetBtn : function(newButtonValue) {
 	    	resetButton = newButtonValue;
+	    },
+
+	    setScore : function(newScore) {
+	    	displayScore.setText("Score : " + newScore);
 	    },
 
 	    // METHOD
@@ -52,6 +61,11 @@ function Parameters(){
                 return true;
             }
             return false;
+	    },
+
+	    initScore : function() {
+	    	var style = { fill: "#FF0000", font: "20px Arial"};
+	    	displayScore = game.add.text(600, 740, "Score : 0", style);
 	    }
 	};
 }
