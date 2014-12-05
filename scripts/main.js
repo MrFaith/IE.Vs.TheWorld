@@ -34,6 +34,7 @@
             game.load.image('gameOver', 'assets/game_over.png');
             game.load.image('iebg', 'assets/background/ie/ie95Background.png');
             game.load.image('operabg', 'assets/background/operaBackground.png');
+            game.load.image('upgrade_player', 'assets/upgradeVersion.png');
         },
 
         create: function() { 
