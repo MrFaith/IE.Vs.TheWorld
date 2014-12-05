@@ -4,19 +4,12 @@
 
     //Globales qui nous seront nécéssaires
 
-        var player;
         var score = 0;
         var displayScore = "Score : ";
         var getScore;
 
         var gameOver;
-        var iebg;
         var operabg;
-
-        //ennemies
-        var bookmarks;
-
-        var bullets;
 
     //Objects
     var varParameters = Parameters();
@@ -48,11 +41,8 @@
             // This function will be called after the preload function. Here we set up the game, display sprites, add labels, etc.
 
             // Affiche un sprite sur l'écran
-            // Parametres: x position, y position, nom du sprite
-            playerObject.addSprite(375, 655, 'player');
+            playerObject.addSprite();
 
-            //Background IE
-            iebg = game.add.sprite(0, 685, 'iebg');
             // Background Opera
             operabg = game.add.sprite(0, 0, 'operabg');
 
@@ -60,16 +50,13 @@
             enemies.initBookmarks();
 
             //création instance bookmark
-            creationVagueBookmark(enemies.getBookmarks());
-
-            // Add gravity to the enemies (pour donner l'impression que l'on avance)
-            game.physics.arcade.enable(iebg);
+            creationVagueBookmark(enemies.getBookmarks());           
+           
 
             //Initialisation de nos tirs de niveau 1 
             bullets.initSimpleBullets();
 
-            var style = { fill: "#FF0000", font: "20px Arial"};
-            getScore = game.add.text(600, 740, displayScore+score, style);
+            varParameters.initScore();
 
             //  On ajoute nos touches d'actions (voir pour les modules)
             varParameters.setCursors(game.input.keyboard.createCursorKeys());
@@ -99,9 +86,9 @@
             }
 
             //  Collisions !!!
-           /* game.physics.arcade.overlap(bullets, bookmarks, killBookmarks, null, this);
-            game.physics.arcade.overlap(bookmarks, player, enemyHits, null, this);
-            game.physics.arcade.overlap(bookmarks, iebg, enemyHits, null, this);*/
+            game.physics.arcade.collide(bullets.getSimpleBullets(), enemies.getBookmarks(), killBookmarks, null, this);
+            game.physics.arcade.collide(enemies.getBookmarks(), playerObject.getPlayer(), enemyHits, null, this);
+            game.physics.arcade.collide(enemies.getBookmarks(), playerObject.getBackground(), enemyHits, null, this);
 
             // Reset du jeu
             /*if (resetButton.isDown)
