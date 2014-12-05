@@ -21,6 +21,9 @@ function Player() {
 		getBulletAvailable : function() {
 			return bulletsAvailable;
 		},
+		getPlayer : function() {
+			return ie;
+		}
 
 		// Setters
 		setScore : function(newScore) {
@@ -35,7 +38,13 @@ function Player() {
 
 		// Method
 		addSprite : function(xPos, yPos, name_sprite) {
-            player = game.add.sprite(375, 655, 'player'); 
+            ie = game.add.sprite(xPos, yPos, name_sprite); 
+		},
+		position : function() {
+			xPos = ie.body.x;
+			yPos = ie.body.y;
+
+			return {'x':xPos, 'y':yPos};
 		}
 	};
 }
