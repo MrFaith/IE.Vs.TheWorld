@@ -17,6 +17,10 @@ function Bullets() {
 		createSimpleBullets : function(xPosition, yPosition) {
 			var bullet = simple_bullet.create( xPosition, yPosition, 'simpleBullets'); // Déclare une nouvelle bullet du groupe bullets
         	bullet.body.velocity.y -= 250;
+		},
+
+		getSimpleBullets: function(){
+			return simple_bullet;
 		}
 	};
 }

@@ -5,7 +5,7 @@ function shoot(player, bullets){
     if( bulletsAvailable == true ){
         player.setBulletAvailable(false);
         playerPosition = player.position();
-        bullets.createSimpleBullets( playerPosition.x, playerPosition.y);
+        bullets.createSimpleBullets( playerPosition.x+8, playerPosition.y);
 
         setTimeout( function(){
             player.setBulletAvailable(true);
