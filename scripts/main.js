@@ -75,26 +75,32 @@
             getScore = game.add.text(600, 740, displayScore+score, style);
 
             //  On ajoute nos touches d'actions (voir pour les modules)
-            cursors = game.input.keyboard.createCursorKeys();
+            /*cursors = game.input.keyboard.createCursorKeys();
             fireButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-            resetButton = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
+            resetButton = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);*/
+            varParameters.setCursors(game.input.keyboard.createCursorKeys());
+            varParameters.setFireBtn(game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR));
+            
+            // Reset button pas fini
+            //varParameters.setResetBtn(game.input.keyboard.addKey(Phaser.Keyboard.ENTER)); 
+
         },
 
         update: function() {
             // This is where we will spend the most of our time. This function is called 60 times per second to update the game.
 
             player.body.velocity.setTo(0, 0);
-            if (cursors.left.isDown && player.body.x > 20)
+            if (varParameters.keyLeftIsDown() && player.body.x > 20)
             {
                 player.body.velocity.x = -450;
             }
-            else if (cursors.right.isDown && player.body.x < 690)
+            else if (varParameters.keyRightIsDown() && player.body.x < 690)
             {
                 player.body.velocity.x = 450;
             }
 
             //  Firing?
-            if (fireButton.isDown)
+            if (varParameters.fireIsDown())
             {
                 shoot(player, bullets);
             }
@@ -105,11 +111,11 @@
             game.physics.arcade.overlap(bookmarks, iebg, enemyHits, null, this);
 
             // Reset du jeu
-            if (resetButton.isDown)
+            /*if (resetButton.isDown)
             {
                 game.paused = false;
                 gameRestart();
-            }
+            }*/
 
         },
 

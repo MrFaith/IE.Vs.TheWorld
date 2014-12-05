@@ -27,6 +27,27 @@ function Parameters(){
 
 	    setResetBtn : function(newButtonValue) {
 	    	resetButton = newButtonValue;
+	    },
+
+	    keyLeftIsDown : function() {
+	    	if (cursors.left.isDown) {
+	    		return true;
+	    	}
+	    	return false;
+	    },
+
+	    keyRightIsDown : function() {
+	    	if (cursors.right.isDown) {
+	    		return true;
+	    	}
+	    	return false;
+	    },
+
+	    fireIsDown : function() {
+	    	if (fireButton.isDown) {
+                return true;
+            }
+            return false;
 	    }
 	};
 }
