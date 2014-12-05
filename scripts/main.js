@@ -49,7 +49,7 @@
 
             // Affiche un sprite sur l'écran
             // Parametres: x position, y position, nom du sprite
-            player = game.add.sprite(375, 655, 'player');  
+            playerObject.addSprite(375, 655, 'player');
 
             //Background IE
             iebg = game.add.sprite(0, 685, 'iebg');
@@ -75,9 +75,6 @@
             getScore = game.add.text(600, 740, displayScore+score, style);
 
             //  On ajoute nos touches d'actions (voir pour les modules)
-            /*cursors = game.input.keyboard.createCursorKeys();
-            fireButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-            resetButton = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);*/
             varParameters.setCursors(game.input.keyboard.createCursorKeys());
             varParameters.setFireBtn(game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR));
             
@@ -102,7 +99,7 @@
             //  Firing?
             if (varParameters.fireIsDown())
             {
-                shoot(player, bullets);
+                shoot(playerObject, bullets);
             }
 
             //  Collisions !!!

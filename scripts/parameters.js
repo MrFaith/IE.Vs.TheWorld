@@ -5,6 +5,8 @@ function Parameters(){
 	var resetButton;
 
 	return {
+
+		// GETTER 
 	    getCursors : function() {
 	    	return cursors;
 	    },
@@ -17,6 +19,7 @@ function Parameters(){
 	    	return resetButton;
 	    },
 
+	    // SETTER
 	    setCursors : function(newCursorValue) {
 	    	cursors = newCursorValue;
 	    },
@@ -29,6 +32,7 @@ function Parameters(){
 	    	resetButton = newButtonValue;
 	    },
 
+	    // METHOD
 	    keyLeftIsDown : function() {
 	    	if (cursors.left.isDown) {
 	    		return true;

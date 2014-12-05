@@ -5,14 +5,16 @@ function Player() {
 	var bulletsAvailable = true;
 	//TODO : Bonus
 
+	var ie;
+
 	return {
-		//Getters
+		// Getters
 		getScore : function() {
 			return score;
 		},
-		getSprite : function() {
+		/*getSprite : function() {
 			return sprite;
-		},
+		},*/
 		getVersion : function() {
 			return version;
 		},
@@ -24,14 +26,16 @@ function Player() {
 		setScore : function(newScore) {
 			score = newScore;
 		},
-		setSprite : function(newSprite) {
-			//TODO : A voir!
-		},
 		setVersion : function(newVersion) {
 			version = newVersion;
 		},
 		setBulletAvailable : function(newBulletAvailable) {
 			bulletsAvailable = newBulletAvailable;
+		},
+
+		// Method
+		addSprite : function(xPos, yPos, name_sprite) {
+            player = game.add.sprite(375, 655, 'player'); 
 		}
 	};
 }
