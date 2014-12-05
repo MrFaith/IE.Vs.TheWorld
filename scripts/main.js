@@ -22,7 +22,7 @@
     var varParameters = Parameters();
     var playerObject = Player();
     var bullets = Bullets();
-    /*var enemies = new Enemies();*/
+    var enemies = Enemies();
 
     // And now we define our first and only state, I'll call it 'main'. A state is a specific scene of a game like a menu, a game over screen, etc. => donc on aura probablement besoin de 6 ou 7 states (1 par niveau, menu, scores, etc...)
     var main_state = {
@@ -57,16 +57,13 @@
             operabg = game.add.sprite(0, 0, 'operabg');
 
             //Groupe de favoris
-            bookmarks = game.add.group(200, 200, 'bookmarks');
-            bookmarks.enableBody = true;
-            bookmarks.createMultiple(200, 'bookmarks');
+            enemies.initBookmarks();
 
             //création instance bookmark
-            creationVagueBookmark(bookmarks);
+            creationVagueBookmark(enemies.getBookmarks());
 
             // Add gravity to the enemies (pour donner l'impression que l'on avance)
             game.physics.arcade.enable(iebg);
-            game.physics.arcade.enable(player); 
 
             //Initialisation de nos tirs de niveau 1 
             bullets.initSimpleBullets();
@@ -76,24 +73,23 @@
 
             //  On ajoute nos touches d'actions (voir pour les modules)
             varParameters.setCursors(game.input.keyboard.createCursorKeys());
-            varParameters.setFireBtn(game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR));
-            
+            varParameters.setFireBtn(game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR));          
             // Reset button pas fini
             //varParameters.setResetBtn(game.input.keyboard.addKey(Phaser.Keyboard.ENTER)); 
-
         },
 
         update: function() {
             // This is where we will spend the most of our time. This function is called 60 times per second to update the game.
 
-            player.body.velocity.setTo(0, 0);
-            if (varParameters.keyLeftIsDown() && player.body.x > 20)
+            playerObject.defineVelocity(0,0);
+            var playerPosition = playerObject.position();
+            if (varParameters.keyLeftIsDown()  && playerPosition.x > 20)
             {
-                player.body.velocity.x = -450;
+                playerObject.defineVelocity(-450,0);
             }
-            else if (varParameters.keyRightIsDown() && player.body.x < 690)
+            else if (varParameters.keyRightIsDown() && playerPosition.x < 690)
             {
-                player.body.velocity.x = 450;
+                playerObject.defineVelocity(450,0);
             }
 
             //  Firing?
@@ -103,9 +99,9 @@
             }
 
             //  Collisions !!!
-            game.physics.arcade.overlap(bullets, bookmarks, killBookmarks, null, this);
+           /* game.physics.arcade.overlap(bullets, bookmarks, killBookmarks, null, this);
             game.physics.arcade.overlap(bookmarks, player, enemyHits, null, this);
-            game.physics.arcade.overlap(bookmarks, iebg, enemyHits, null, this);
+            game.physics.arcade.overlap(bookmarks, iebg, enemyHits, null, this);*/
 
             // Reset du jeu
             /*if (resetButton.isDown)

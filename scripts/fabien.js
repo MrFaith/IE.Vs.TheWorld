@@ -8,10 +8,10 @@ function creationVagueBookmark(bookmarks) {
 		cpt++;
 	}, this);
 
-	deplacementBookmark(cpt);
+	deplacementBookmark(cpt,bookmarks);
 }
 
-function deplacementBookmark(cpt) {
+function deplacementBookmark(cpt, bookmarks) {
 	bookmarkboucle = this.game.time.events.add(600, function() {
 		if(cpt > 0) {
 			var randomNumber = Math.floor((Math.random() * 600) + 30);
@@ -20,7 +20,7 @@ function deplacementBookmark(cpt) {
 			bookmark.anchor.setTo(0.5, 0.5);
 			bookmark.body.velocity.y = 140;
 			cpt--;
-			deplacementBookmark(cpt);
+			deplacementBookmark(cpt, bookmarks);
 		}
     }, this);
 }

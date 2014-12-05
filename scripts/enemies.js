@@ -9,6 +9,9 @@ function Enemies() {
 		getBulletAvailable : function() {
 			return bulletsAvailable;
 		},
+		getBookmarks : function	(){
+			return bookmarks;
+		},
 
 		//Setters
 		setBulletAvailable : function(newBulletAvailable) {
@@ -17,7 +20,9 @@ function Enemies() {
 
 		//Method
 		initBookmarks : function() {
-
+			bookmarks = game.add.group(200, 200, 'bookmarks');
+            bookmarks.enableBody = true;
+            bookmarks.createMultiple(200, 'bookmarks');
 		}
 	};
 }
