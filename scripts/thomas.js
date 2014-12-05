@@ -4,10 +4,8 @@ function shoot(player, bullets){
     //On ne tire que si le joueur à le droit de tirer
     if( bulletsAvailable == true ){
         player.setBulletAvailable(false);
-        //console.log( player.position() );
-        /*var xPosition = player.body.x + 15 ;
-        var yPosition = player.body.y + 10 ; //On ajoute 10 pixels pour créer un petit décalage  
-        bullets.createSimpleBullets( xPosition, yPosition);*/
+        playerPosition = player.position();
+        bullets.createSimpleBullets( playerPosition.x, playerPosition.y);
 
         setTimeout( function(){
             player.setBulletAvailable(true);
