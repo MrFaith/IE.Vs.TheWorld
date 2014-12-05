@@ -23,7 +23,7 @@ function Player() {
 		},
 		getPlayer : function() {
 			return ie;
-		}
+		},
 
 		// Setters
 		setScore : function(newScore) {
@@ -41,10 +41,12 @@ function Player() {
             ie = game.add.sprite(xPos, yPos, name_sprite); 
 		},
 		position : function() {
-			xPos = ie.body.x;
+			/*xPos = ie.body.x;
 			yPos = ie.body.y;
+			console.log(xPos);
+			console.log(yPos);*/
 
-			return {'x':xPos, 'y':yPos};
+			//return ['x':xPos, 'y':yPos];
 		}
 	};
 }
