@@ -17,6 +17,7 @@ function Bullets() {
 		createSimpleBullets : function(xPosition, yPosition) {
 			var bullet = simple_bullet.create( xPosition, yPosition, 'simpleBullets'); // Déclare une nouvelle bullet du groupe bullets
         	bullet.body.velocity.y -= 250;
+        	bullet.events.onOutOfBounds.add( destroyBullet, this );
 		},
 
 		getSimpleBullets: function(){
@@ -24,3 +25,8 @@ function Bullets() {
 		}
 	};
 }
+
+	function destroyBullet(bullet){
+		console.log('mort');
+		bullet.destroy();
+	}

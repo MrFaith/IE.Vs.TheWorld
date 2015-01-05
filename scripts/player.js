@@ -32,6 +32,16 @@ function Player() {
 		},
 		setVersion : function(newVersion) {
 			version = newVersion;
+			switch(version){
+				case 1:
+					ie.loadTexture('player', 0, 0);
+					background.loadTexture('iebg');
+					break;
+				case 2:
+					background.loadTexture('iebgVersion2');
+					ie.loadTexture('playerVersion2', 0, 0);
+					break;
+			}
 		},
 		setBulletAvailable : function(newBulletAvailable) {
 			bulletsAvailable = newBulletAvailable;
@@ -45,22 +55,19 @@ function Player() {
             //Background IE
             background = game.add.sprite(0, 685, 'iebg');
             game.physics.arcade.enable(background);
-
-		},
+		},	
 		position : function() {
 			xPos = ie.body.x;
 			yPos = ie.body.y;
 			return {'x':xPos, 'y':yPos};
 		},
-
 		getBackground : function(){
 			return background;
 		},
-
 		defineVelocity : function(x, y){
 			ie.body.velocity.setTo(x, y);
+			background.body.velocity.setTo(0, 0);
 		},
-
 		addScore : function(newScore) {
 			score += newScore;
 		}

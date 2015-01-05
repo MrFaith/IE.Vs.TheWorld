@@ -16,6 +16,7 @@
     var playerObject = Player();
     var bullets = Bullets();
     var enemies = Enemies();
+    var bonus = Bonus();
 
     // And now we define our first and only state, I'll call it 'main'. A state is a specific scene of a game like a menu, a game over screen, etc. => donc on aura probablement besoin de 6 ou 7 states (1 par niveau, menu, scores, etc...)
     var main_state = {
@@ -27,12 +28,15 @@
             game.stage.backgroundColor = '#fff';
 
             game.load.image('player', 'assets/ie1.png'); //IE 
+            game.load.image('playerVersion2', 'assets/ie2.png');
+            game.load.image('playerVersion3', 'assets/ie3.png');
             game.load.image('bookmarks', 'assets/enemies/opera/bookmark.png') //Ennemy Favoris
             game.load.image('simpleBullets', 'assets/bullet1.png'); //Tir simple
             game.load.image('laser', 'assets/laser.png'); //Tir simple
 
             game.load.image('gameOver', 'assets/game_over.png');
             game.load.image('iebg', 'assets/background/ie/ie95Background.png');
+            game.load.image('iebgVersion2', 'assets/background/ie/ieV2Background.png');
             game.load.image('operabg', 'assets/background/operaBackground.png');
             game.load.image('upgrade_player', 'assets/upgradeVersion.png');
         },
@@ -47,8 +51,9 @@
             // Background Opera
             operabg = game.add.sprite(0, 0, 'operabg');
 
-            //Groupe de favoris
+            //Groupe de favoris && Bonus
             enemies.initBookmarks();
+            bonus.initUpgrades();
 
             //création instance bookmark
             creationVagueBookmark(enemies.getBookmarks());           
@@ -57,7 +62,9 @@
             //Initialisation de nos tirs de niveau 1 
             bullets.initSimpleBullets();
 
+            //Scoring And world
             varParameters.initScore();
+            game.world.setBounds(0, 0, 1000, 1000, false, false, false, false);
 
             //  On ajoute nos touches d'actions (voir pour les modules)
             varParameters.setCursors(game.input.keyboard.createCursorKeys());
@@ -70,6 +77,9 @@
             // This is where we will spend the most of our time. This function is called 60 times per second to update the game.
 
             playerObject.defineVelocity(0,0);
+            playerObject.getPlayer().body.y = 655;
+
+            //playerObject.getBackground().defineVelocity(0,0);
             var playerPosition = playerObject.position();
             if (varParameters.keyLeftIsDown()  && playerPosition.x > 20)
             {
@@ -90,6 +100,7 @@
             game.physics.arcade.collide(bullets.getSimpleBullets(), enemies.getBookmarks(), killBookmarks, null, this);
             game.physics.arcade.collide(enemies.getBookmarks(), playerObject.getPlayer(), enemyHits, null, this);
             game.physics.arcade.collide(enemies.getBookmarks(), playerObject.getBackground(), enemyHits, null, this);
+            game.physics.arcade.collide(playerObject.getPlayer(), bonus.getUpgradeItems(), changeVersion, null, this);
 
             // Reset du jeu
             /*if (resetButton.isDown)

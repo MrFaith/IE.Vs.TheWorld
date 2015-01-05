@@ -1,26 +1,30 @@
 function killBookmarks(bullet, bookmark) {
-	bingo(bookmark.body.x, bookmark.body.y);
+
+	bingo(bookmark.body.x, bookmark.body.y, bonus ); //bonus is a global var
 	bullet.kill();
 	bookmark.kill();
 
 	playerObject.addScore(100);
 	varParameters.setScore(playerObject.getScore());
-
-	
 }
 
-function enemyHits(enemy, something) {
+function enemyHits(something, enemy) {
 	enemy.kill();
 
 	var ie = playerObject.getPlayer();
 	var background = playerObject.getBackground();
 	var bookmarks = enemies.getBookmarks();
 	var simpleBullets = bullets.getSimpleBullets();
-	background.kill();
-	ie.kill();
 
-	game_over( bookmarks, simpleBullets );
-
+	var version = playerObject.getVersion();
+	version -= 1;
+	if(version > 0){
+		playerObject.setVersion(version);
+	} else {
+		background.kill();
+		ie.kill();
+		game_over( bookmarks, simpleBullets );
+	}
 }
 
 function game_over( bookmarks, currentBullets) {
@@ -30,29 +34,19 @@ function game_over( bookmarks, currentBullets) {
 	game.paused = true;
 }
 
-function bingo(x, y){
+function bingo(x, y, bonusItems){
 	var nbRandom;
 
 	nbRandom = Math.random();
 
 	if(nbRandom >= 0.7){
-		 upgrade_player = game.add.sprite(x, y, 'upgrade_player'); 
-         game.physics.arcade.enable(upgrade_player); 
-         upgrade_player.body.velocity.setTo(0, 200);
-         playerObject.setVersion( playerObject.getVersion() );
-         game.physics.arcade.collide(upgrade_player, playerObject.getPlayer(), changeVersion, null, this);
+		bonusItems.createUpgradeItem(x, y);
 	}
 }
 
-function changeVersion(upgradeLogo, player){
-	alert('b?');
+function changeVersion(player, upgradeLogo){
 	upgradeLogo.kill();
-	var version = playerObject.getVersion();
-	console.log(version);
-	switch(version){
-		case 1:
-			break;
-		case 2:
-			break;
-	}
+	var version = playerObject.getVersion(); 
+	if(version < 2)
+		playerObject.setVersion( version + 1 );	
 }
