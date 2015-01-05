@@ -1,27 +1,36 @@
-function shoot(player){
-
+function shoot(player, bullets){
+    var version = player.getVersion();
+    var bulletsAvailable = player.getBulletAvailable();
     //On ne tire que si le joueur à le droit de tirer
     if( bulletsAvailable == true ){
-        bulletsAvailable = false;
-
-        var xPosition = player.body.x + 15 ;
-        var yPosition = player.body.y + 10 ; //On ajoute 10 pixels pour créer un petit décalage  
-        var bullet = bullets.create( xPosition, yPosition, 'bullets'); // Déclare une nouvelle bullet du groupe bullets
-        
-        bullet.body.velocity.y -= 250;
-        // Pour faire effet de laaag !
-       /*setInterval( function(){
-            bullet.body.velocity.y -= 1500; // On la met en mouvement
-            setTimeout( function(){
-                bullet.body.velocity.y = 0;
-            }, 15);
-        }, 300);  */   
-
+        switch(version){
+            case 1:
+                shootSimpleBullets(player);
+                break;
+            case 2:
+                shootDoubleBullets(player);
+                break;
+        }
         setTimeout( function(){
-            bulletsAvailable=true;
+            player.setBulletAvailable(true);
         }, 200);
     }
 }
+
+
+function shootDoubleBullets(player){
+    player.setBulletAvailable(false);
+    playerPosition = player.position();
+    bullets.createSimpleBullets( playerPosition.x+15, playerPosition.y);
+    bullets.createSimpleBullets( playerPosition.x+5, playerPosition.y);
+}
+
+function shootSimpleBullets(player){
+    player.setBulletAvailable(false);
+    playerPosition = player.position();
+    bullets.createSimpleBullets( playerPosition.x+8, playerPosition.y);
+}
+
 
 //bullet.loadTexture('laser', 0, false);
 

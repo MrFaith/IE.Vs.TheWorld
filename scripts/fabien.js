@@ -8,10 +8,10 @@ function creationVagueBookmark(bookmarks) {
 		cpt++;
 	}, this);
 
-	deplacementBookmark(cpt);
+	deplacementBookmark(cpt,bookmarks);
 }
 
-function deplacementBookmark(cpt) {
+function deplacementBookmark(cpt, bookmarks) {
 	bookmarkboucle = this.game.time.events.add(600, function() {
 		if(cpt > 0) {
 			var randomNumber = Math.floor((Math.random() * 600) + 30);
@@ -20,16 +20,20 @@ function deplacementBookmark(cpt) {
 			bookmark.anchor.setTo(0.5, 0.5);
 			bookmark.body.velocity.y = 140;
 			cpt--;
-			deplacementBookmark(cpt);
+			deplacementBookmark(cpt, bookmarks);
 		}
     }, this);
 }
 
 function gameRestart() {
-	/*bullets.destroy();*/
+	/*bullets.destroy();
     bookmarks.destroy();
     score = 0;
-    //Arreter boucle de bookmark
-	//bookmarkboucle.destroy();
-    game.state.restart(true);
+    game.state.remove('main'); 
+    game.state.add('main', main_state);  
+    game.state.start('main');*/
+
+    bookmarks.removeAll();
+    score = 0;
+    game.state.start('main');
 }
