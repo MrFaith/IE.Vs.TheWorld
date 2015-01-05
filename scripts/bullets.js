@@ -12,12 +12,15 @@ function Bullets() {
 			simple_bullet = game.add.group();
 	       	simple_bullet.enableBody = true;
 	        simple_bullet.createMultiple(30, 'simpleBullets');
+	        simple_bullet.checkWorldBounds = true;
 		},
 
 		createSimpleBullets : function(xPosition, yPosition) {
 			var bullet = simple_bullet.create( xPosition, yPosition, 'simpleBullets'); // Déclare une nouvelle bullet du groupe bullets
         	bullet.body.velocity.y -= 250;
+        	bullet.checkWorldBounds = true;        	
         	bullet.events.onOutOfBounds.add( destroyBullet, this );
+  			//this.outOfBoundsKill = true;
 		},
 
 		getSimpleBullets: function(){
@@ -27,6 +30,5 @@ function Bullets() {
 }
 
 	function destroyBullet(bullet){
-		console.log('mort');
-		bullet.destroy();
+		bullet.kill();
 	}

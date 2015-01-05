@@ -39,7 +39,7 @@ function bingo(x, y, bonusItems){
 
 	nbRandom = Math.random();
 
-	if(nbRandom >= 0.7){
+	if(nbRandom >= 0.95){
 		bonusItems.createUpgradeItem(x, y);
 	}
 }

@@ -64,7 +64,7 @@
 
             //Scoring And world
             varParameters.initScore();
-            game.world.setBounds(0, 0, 1000, 1000, false, false, false, false);
+            game.world.setBounds(0, 0, 750, 900, false, false, false, false);
 
             //  On ajoute nos touches d'actions (voir pour les modules)
             varParameters.setCursors(game.input.keyboard.createCursorKeys());
@@ -83,11 +83,15 @@
             var playerPosition = playerObject.position();
             if (varParameters.keyLeftIsDown()  && playerPosition.x > 20)
             {
-                playerObject.defineVelocity(-450,0);
+                var movementBonus = 0.9 + ( (playerObject.getVersion() )*0.1 ); //Version 1 == 1, Version 2 == 1.1
+                var movement = movementBonus*(-450);
+                playerObject.defineVelocity(movement,0);
             }
             else if (varParameters.keyRightIsDown() && playerPosition.x < 690)
             {
-                playerObject.defineVelocity(450,0);
+                var movementBonus = 0.9 + ( (playerObject.getVersion() )*0.1 ); //Version 1 == 1, Version 2 == 1.1, ...
+                var movement = movementBonus*(450);
+                playerObject.defineVelocity(movement,0);
             }
 
             //  Firing?
