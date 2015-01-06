@@ -31,6 +31,7 @@ function game_over( bookmarks, currentBullets) {
 	var gameOver = game.add.sprite(250, 250, 'gameOver');
 	bookmarks.removeAll();
 	currentBullets.removeAll();
+    bonus.getUpgradeItems().removeAll();
 	game.paused = true;
 }
 

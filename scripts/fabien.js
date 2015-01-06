@@ -27,14 +27,8 @@ function deplacementBookmark(cpt, bookmarks) {
 }
 
 function gameRestart() {
-	/*bullets.destroy();
-    bookmarks.destroy();
-    score = 0;
-    game.state.remove('main'); 
-    game.state.add('main', main_state);  
-    game.state.start('main');*/
-
-    bookmarks.removeAll();
-    score = 0;
+    enemies.getBookmarks().removeAll();
+    bonus.getUpgradeItems().removeAll();
+	game.paused = false;
     game.state.start('main');
 }
