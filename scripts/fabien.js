@@ -1,13 +1,12 @@
 var bookmarkboucle;
 
 function creationVagueBookmark(bookmarks) {
-
 	//Pour l'instant une seule création
 	var cpt = 0;
 	bookmarks.forEach(function(){
 		cpt++;
 	}, this);
-
+	
 	deplacementBookmark(cpt,bookmarks);
 }
 
@@ -21,6 +20,8 @@ function deplacementBookmark(cpt, bookmarks) {
 			bookmark.body.velocity.y = 140;
 			cpt--;
 			deplacementBookmark(cpt, bookmarks);
+		} else {
+
 		}
     }, this);
 }

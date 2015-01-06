@@ -32,11 +32,13 @@
             game.load.image('playerVersion3', 'assets/ie3.png');
             game.load.image('bookmarks', 'assets/enemies/opera/bookmark.png') //Ennemy Favoris
             game.load.image('simpleBullets', 'assets/bullet1.png'); //Tir simple
-            game.load.image('laser', 'assets/laser.png'); //Tir simple
+            game.load.image('laser', 'assets/laser.png'); //Laser?
+            game.load.image('fireBall','asset/firesprite.gif');
 
             game.load.image('gameOver', 'assets/game_over.png');
             game.load.image('iebg', 'assets/background/ie/ie95Background.png');
             game.load.image('iebgVersion2', 'assets/background/ie/ieV2Background.png');
+            game.load.image('iebgVersion3', 'assets/background/ie/ieV3Background.png');
             game.load.image('operabg', 'assets/background/operaBackground.png');
             game.load.image('upgrade_player', 'assets/upgradeVersion.png');
         },
@@ -44,23 +46,20 @@
         create: function() { 
             game.physics.startSystem(Phaser.Physics.ARCADE);
             // This function will be called after the preload function. Here we set up the game, display sprites, add labels, etc.
-
-            // Affiche un sprite sur l'écran
-            playerObject.addSprite();
-
-            // Background Opera
-            operabg = game.add.sprite(0, 0, 'operabg');
+            playerObject.addSprite(); // Display Player sprite
+            operabg = game.add.sprite(0, 0, 'operabg'); // Background Opera
 
             //Groupe de favoris && Bonus
             enemies.initBookmarks();
             bonus.initUpgrades();
 
             //création instance bookmark
-            creationVagueBookmark(enemies.getBookmarks());           
+            creationVagueBookmark(enemies.getBookmarks());
+                       
            
-
-            //Initialisation de nos tirs de niveau 1 
+            //Initialisation de nos tirs
             bullets.initSimpleBullets();
+            bullets.initFireBalls();
 
             //Scoring And world
             varParameters.initScore();
@@ -75,7 +74,6 @@
 
         update: function() {
             // This is where we will spend the most of our time. This function is called 60 times per second to update the game.
-
             playerObject.defineVelocity(0,0);
             playerObject.getPlayer().body.y = 655;
 
@@ -112,10 +110,9 @@
                 game.paused = false;
                 gameRestart();
             }*/
-
         },
 
     }
     // And finally we tell Phaser to add and start our 'main' state
-        game.state.add('main', main_state);  
-        game.state.start('main'); 
+    game.state.add('main', main_state);  
+    game.state.start('main'); 

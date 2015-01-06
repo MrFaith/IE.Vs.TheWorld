@@ -65,7 +65,7 @@ function Parameters(){
 
 	    initScore : function() {
 	    	var style = { fill: "#FF0000", font: "20px Arial"};
-	    	displayScore = game.add.text(600, 740, "Score : 0", style);
+	    	displayScore = game.add.text(325, 750, "Score : 0", style);
 	    }
 	};
 }

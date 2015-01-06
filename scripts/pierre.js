@@ -47,6 +47,6 @@ function bingo(x, y, bonusItems){
 function changeVersion(player, upgradeLogo){
 	upgradeLogo.kill();
 	var version = playerObject.getVersion(); 
-	if(version < 2)
+	if(version < 3)
 		playerObject.setVersion( version + 1 );	
 }

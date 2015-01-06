@@ -3,6 +3,7 @@ function Enemies() {
 
 	//Group
 	var bookmarks;
+	var operaBoss;
 
 	return {
 		//Getters
@@ -21,6 +22,13 @@ function Enemies() {
 		//Method
 		initBookmarks : function() {
 			bookmarks = game.add.group(200, 200, 'bookmarks');
+            bookmarks.enableBody = true;
+            bookmarks.createMultiple(200, 'bookmarks');
+		},
+		initOperaBoss : function() {
+			operaBoss = game.add.sprite(350, -20, 'iebg');
+            game.physics.arcade.enable(operaBoss);
+
             bookmarks.enableBody = true;
             bookmarks.createMultiple(200, 'bookmarks');
 		}
