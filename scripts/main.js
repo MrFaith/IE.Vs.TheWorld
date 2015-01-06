@@ -35,7 +35,8 @@
             game.load.image('laser', 'assets/laser.png'); //Laser?
             game.load.image('fireBall','asset/firesprite.gif');
 
-            game.load.image('gameOver', 'assets/game_over.png');
+            game.load.image('gameOver', 'assets/miscellaneous/game_over.png');
+            game.load.image('bonus', 'assets/miscellaneous/bonus.png');
             game.load.image('iebg', 'assets/background/ie/ie95Background.png');
             game.load.image('iebgVersion2', 'assets/background/ie/ieV2Background.png');
             game.load.image('iebgVersion3', 'assets/background/ie/ieV3Background.png');

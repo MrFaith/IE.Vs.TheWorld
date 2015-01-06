@@ -28,7 +28,7 @@ function enemyHits(something, enemy) {
 }
 
 function game_over( bookmarks, currentBullets) {
-	gameOver = game.add.sprite(250, 250, 'gameOver');
+	var gameOver = game.add.sprite(250, 250, 'gameOver');
 	bookmarks.removeAll();
 	currentBullets.removeAll();
 	game.paused = true;
@@ -39,7 +39,7 @@ function bingo(x, y, bonusItems){
 
 	nbRandom = Math.random();
 
-	if(nbRandom >= 0.95){
+	if(nbRandom >= 0.50){
 		bonusItems.createUpgradeItem(x, y);
 	}
 }
@@ -47,6 +47,11 @@ function bingo(x, y, bonusItems){
 function changeVersion(player, upgradeLogo){
 	upgradeLogo.kill();
 	var version = playerObject.getVersion(); 
-	if(version < 3)
+	if(version < 3) {
 		playerObject.setVersion( version + 1 );	
+		var imageBonus = game.add.sprite(130, 250, 'bonus');
+		setTimeout(function(){
+			imageBonus.kill();
+		}, 500);
+	}
 }
