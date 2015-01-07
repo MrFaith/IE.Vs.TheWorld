@@ -38,4 +38,7 @@ function gameRestart() {
 
 function gameStart() {
 	game.state.start('main');
+
+	var id_start = document.getElementById('start');
+	id_start.parentNode.removeChild(id_start);
 }
