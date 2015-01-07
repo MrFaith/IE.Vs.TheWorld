@@ -45,6 +45,10 @@ function Player() {
 					ie.loadTexture('playerVersion3', 0, 0);
 					background.loadTexture('iebgVersion3');
 					break;
+				case 4:
+					ie.loadTexture('playerVersion4', 0, 0);
+					//background.loadTexture('iebgVersion4');
+					break;
 			}
 		},
 		setBulletAvailable : function(newBulletAvailable) {

@@ -48,7 +48,7 @@ function bingo(x, y, bonusItems){
 function changeVersion(player, upgradeLogo){
 	upgradeLogo.kill();
 	var version = playerObject.getVersion(); 
-	if(version < 3) {
+	if(version < 4) {
 		playerObject.setVersion( version + 1 );	
 		var imageBonus = game.add.sprite(130, 250, 'bonus');
 		setTimeout(function(){

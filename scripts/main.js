@@ -30,10 +30,11 @@
             game.load.image('player', 'assets/ie1.png'); //IE 
             game.load.image('playerVersion2', 'assets/ie2.png');
             game.load.image('playerVersion3', 'assets/ie3.png');
+            game.load.image('playerVersion4', 'assets/ie4.png');
             game.load.image('bookmarks', 'assets/enemies/opera/bookmark.png') //Ennemy Favoris
             game.load.image('simpleBullets', 'assets/bullet1.png'); //Tir simple
             game.load.image('laser', 'assets/laser.png'); //Laser?
-            game.load.image('fireBall','asset/firesprite.gif');
+            game.load.spritesheet('fireBall', 'assets/firesprite.gif', 50, 80, 3);
 
             game.load.image('gameOver', 'assets/miscellaneous/game_over.png');
             game.load.image('bonus', 'assets/miscellaneous/bonus.png');
@@ -101,6 +102,8 @@
 
             //  Collisions !!!
             game.physics.arcade.collide(bullets.getSimpleBullets(), enemies.getBookmarks(), killBookmarks, null, this);
+            game.physics.arcade.collide(bullets.getFireBalls(), enemies.getBookmarks(), killBookmarks, null, this);
+
             game.physics.arcade.collide(enemies.getBookmarks(), playerObject.getPlayer(), enemyHits, null, this);
             game.physics.arcade.collide(enemies.getBookmarks(), playerObject.getBackground(), enemyHits, null, this);
             game.physics.arcade.collide(playerObject.getPlayer(), bonus.getUpgradeItems(), changeVersion, null, this);

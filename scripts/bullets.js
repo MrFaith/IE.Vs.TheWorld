@@ -4,6 +4,7 @@ function Bullets() {
 	var simple_bullet;
 	var double_bullet;
 	var triple_bullet;
+	var fire_balls;
 	var laser;
 	var composite_bullet;
 
@@ -15,11 +16,11 @@ function Bullets() {
 	        simple_bullet.checkWorldBounds = true;
 		},
 
-		initFireBalls : function() {
-			simple_bullet = game.add.group();
-	       	simple_bullet.enableBody = true;
-	        simple_bullet.createMultiple(30, 'simpleBullets');
-	        simple_bullet.checkWorldBounds = true;
+		initFireBalls : function(){
+			fire_balls = game.add.group();
+	       	fire_balls.enableBody = true;
+	        fire_balls.createMultiple(30, 'fireBall');
+	        fire_balls.checkWorldBounds = true;
 		},
 
 		createSimpleBullets : function(xPosition, yPosition) {
@@ -27,7 +28,18 @@ function Bullets() {
         	bullet.body.velocity.y -= 250;
         	bullet.checkWorldBounds = true;        	
         	bullet.events.onOutOfBounds.add( destroyBullet, this );
-  			//this.outOfBoundsKill = true;
+		},
+
+		createFireBalls : function(xPosition, yPosition) {
+			var fire_ball = fire_balls.create(xPosition, yPosition, 'fireBall');
+	        fire_ball.animations.add('shootfire');
+	        //game.physics.arcade.enable(fire_balls);
+			fire_ball.animations.play('shootfire', 12, true);
+			fire_ball.body.velocity.y -= 500;	
+		},
+
+		getFireBalls: function(){
+			return fire_balls;
 		},
 
 		getSimpleBullets: function(){
