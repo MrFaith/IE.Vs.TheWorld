@@ -48,6 +48,7 @@ function launchGearsWave(cpt, paramsEnemies) {
 
 function gameRestart() {
     enemies.getBookmarks().removeAll();
+    enemies.getGears().removeAll();
     bonus.getUpgradeItems().removeAll();
     playerObject.getPlayer().kill();
     playerObject.setScore(0);
