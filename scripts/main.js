@@ -41,6 +41,7 @@
             game.load.image('iebg', 'assets/background/ie/ie95Background.png');
             game.load.image('iebgVersion2', 'assets/background/ie/ieV2Background.png');
             game.load.image('iebgVersion3', 'assets/background/ie/ieV3Background.png');
+            game.load.image('iebgVersion4', 'assets/background/ie/ieV4Background.png');
             game.load.image('operabg', 'assets/background/operaBackground.png');
             game.load.image('upgrade_player', 'assets/upgradeVersion.png');
         },

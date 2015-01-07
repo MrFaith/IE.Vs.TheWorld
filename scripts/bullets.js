@@ -32,9 +32,12 @@ function Bullets() {
 
 		createFireBalls : function(xPosition, yPosition) {
 			var fire_ball = fire_balls.create(xPosition, yPosition, 'fireBall');
+			//Animation
 	        fire_ball.animations.add('shootfire');
-	        //game.physics.arcade.enable(fire_balls);
 			fire_ball.animations.play('shootfire', 12, true);
+			//We kill the fire balls
+			fire_ball.checkWorldBounds = true;        	
+        	fire_ball.events.onOutOfBounds.add( destroyBullet, this );
 			fire_ball.body.velocity.y -= 500;	
 		},
 

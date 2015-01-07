@@ -47,7 +47,7 @@ function Player() {
 					break;
 				case 4:
 					ie.loadTexture('playerVersion4', 0, 0);
-					//background.loadTexture('iebgVersion4');
+					background.loadTexture('iebgVersion4');
 					break;
 			}
 		},
