@@ -32,7 +32,7 @@
             game.load.image('playerVersion4', 'assets/ie4.png');
             game.load.image('simpleBullets', 'assets/bullet1.png'); //Tir simple
             game.load.image('laser', 'assets/laser.png'); //Laser?
-            game.load.spritesheet('fireBall', 'assets/firesprite.gif', 50, 80, 3);
+            game.load.spritesheet('fireBall', 'assets/firesprite.gif',49, 80, 4);
 
             game.load.image('gameOver', 'assets/miscellaneous/game_over.png');
             game.load.image('bonus', 'assets/miscellaneous/bonus.png');
@@ -45,7 +45,8 @@
 
             //Ennemies
             game.load.image('bookmarks', 'assets/enemies/opera/bookmark.png');
-            game.load.spritesheet('gears', 'assets/enemies/opera/engrenage.png', 20, 21,2);
+            game.load.spritesheet('gears', 'assets/enemies/opera/engrenage.png', 20, 21, 2);
+            game.load.spritesheet('operaBoss', 'assets/enemies/opera/operaBoss.png', 120, 110, 4);
         },
 
         create: function() { 
@@ -60,9 +61,9 @@
             bonus.initUpgrades();
 
             //création instance bookmark
-            creationVagueBookmark(enemies.getBookmarks());
-            enemies.gearsWaveCreation();
-                       
+            //creationVagueBookmark(enemies.getBookmarks());
+            //enemies.gearsWaveCreation();
+            enemies.initOperaBoss();         
            
             //Initialisation de nos tirs
             bullets.initSimpleBullets();
@@ -105,13 +106,15 @@
                 shoot(playerObject, bullets);
             }
 
-            //  Collisions !!!
+            //We hit an enemy !!!
             game.physics.arcade.collide(bullets.getSimpleBullets(), enemies.getBookmarks(), killBookmarks, null, this);
             game.physics.arcade.collide(bullets.getFireBalls(), enemies.getBookmarks(), killBookmarks, null, this);
             game.physics.arcade.collide(bullets.getSimpleBullets(), enemies.getGears(), killGears, null, this);
             game.physics.arcade.collide(bullets.getFireBalls(), enemies.getGears(), killGears, null, this);
+            game.physics.arcade.collide(bullets.getSimpleBullets(), enemies.getOperaBoss(), smallHitOperaBoss, null, this);
+            game.physics.arcade.collide(bullets.getFireBalls(), enemies.getOperaBoss(), bigHitOperaBoss, null, this);
 
-            //We are hit by enemy
+            //We are hit by enemy...
             game.physics.arcade.collide(enemies.getBookmarks(), playerObject.getPlayer(), enemyHits, null, this);
             game.physics.arcade.collide(enemies.getBookmarks(), playerObject.getBackground(), enemyHits, null, this);
             game.physics.arcade.collide(enemies.getGears(), playerObject.getPlayer(), enemyHits, null, this);

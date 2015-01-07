@@ -1,21 +1,29 @@
-function killBookmarks(bullet, bookmark) {
 
-	bingo(bookmark.body.x, bookmark.body.y, bonus ); //bonus is a global var
-	bullet.kill();
-	bookmark.kill();
+function bingo(x, y, bonusItems){
+	var nbRandom;
 
-	playerObject.addScore(100);
-	varParameters.setScore(playerObject.getScore());
+	nbRandom = Math.random();
+
+	if(nbRandom >= 0.80){
+		bonusItems.createUpgradeItem(x, y);
+	}
 }
 
-function killGears(bullet, gear) {
+function bigHitOperaBoss(operaBoss, fireBall){
+	fireBall.kill();
+	enemies.reduceOperaBossLife(5);
+}
 
-	bingo(gear.body.x, gear.body.y, bonus ); //bonus is a global var
-	bullet.kill();
-	gear.kill();
-
-	playerObject.addScore(125);
-	varParameters.setScore(playerObject.getScore());
+function changeVersion(player, upgradeLogo){
+	upgradeLogo.kill();
+	var version = playerObject.getVersion(); 
+	if(version < 4) {
+		playerObject.setVersion( version + 1 );	
+		var imageBonus = game.add.sprite(130, 250, 'bonus');
+		setTimeout(function(){
+			imageBonus.kill();
+		}, 500);
+	}
 }
 
 function enemyHits(something, enemy) {
@@ -45,24 +53,26 @@ function game_over( bookmarks, currentBullets) {
 	game.paused = true;
 }
 
-function bingo(x, y, bonusItems){
-	var nbRandom;
+function killBookmarks(bullet, bookmark) {
+	bingo(bookmark.body.x, bookmark.body.y, bonus ); //bonus is a global var
+	bullet.kill();
+	bookmark.kill();
 
-	nbRandom = Math.random();
-
-	if(nbRandom >= 0.80){
-		bonusItems.createUpgradeItem(x, y);
-	}
+	playerObject.addScore(100);
+	varParameters.setScore(playerObject.getScore());
 }
 
-function changeVersion(player, upgradeLogo){
-	upgradeLogo.kill();
-	var version = playerObject.getVersion(); 
-	if(version < 4) {
-		playerObject.setVersion( version + 1 );	
-		var imageBonus = game.add.sprite(130, 250, 'bonus');
-		setTimeout(function(){
-			imageBonus.kill();
-		}, 500);
-	}
+function killGears(bullet, gear) {
+	bingo(gear.body.x, gear.body.y, bonus ); //bonus is a global var
+	bullet.kill();
+	gear.kill();
+
+	playerObject.addScore(125);
+	varParameters.setScore(playerObject.getScore());
 }
+
+function smallHitOperaBoss(operaBoss, bullet){
+	bullet.kill();
+	enemies.reduceOperaBossLife(1);
+}
+

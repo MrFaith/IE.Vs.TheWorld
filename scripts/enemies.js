@@ -5,6 +5,7 @@ function Enemies() {
 	var bookmarks;
 	var gears;
 	var operaBoss;
+	var operaBossLife = 500;
 
 	return {
 		//Getters
@@ -17,10 +18,20 @@ function Enemies() {
 		getGears : function (){
 			return gears;
 		},
+		getOperaBoss : function(){
+			return operaBoss;
+		},
+		getOperaBossLife : function(){
+			return operaBossLife;
+		},
 
 		//Setters
 		setBulletAvailable : function(newBulletAvailable) {
 			bulletsAvailable = newBulletAvailable;
+		},
+
+		reduceOperaBossLife : function(dammages){
+			operaBossLife -= dammages;
 		},
 
 		//Initialisations
@@ -36,11 +47,10 @@ function Enemies() {
 		},
 
 		initOperaBoss : function() {
-			operaBoss = game.add.sprite(350, -20, 'iebg');
+			operaBoss = game.add.sprite(350, -40, 'operaBoss');
             game.physics.arcade.enable(operaBoss);
-
-            /*bookmarks.enableBody = true;
-            bookmarks.createMultiple(200, 'bookmarks');*/
+            operaBoss.body.velocity.y += 300;
+            var attack = operaBossAttack(operaBoss);
 		},
 
 		//ATTACKKK !!!
@@ -51,7 +61,7 @@ function Enemies() {
 				cpt++;
 			}, this);
 			launchGearsWave(cpt,gears);
-		}
+		},
 
 	};
 }

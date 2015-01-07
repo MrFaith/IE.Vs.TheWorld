@@ -34,7 +34,7 @@ function Bullets() {
 			var fire_ball = fire_balls.create(xPosition, yPosition, 'fireBall');
 			//Animation
 	        fire_ball.animations.add('shootfire');
-			fire_ball.animations.play('shootfire', 12, true);
+			fire_ball.animations.play('shootfire', 18, true);
 			//We kill the fire balls
 			fire_ball.checkWorldBounds = true;        	
         	fire_ball.events.onOutOfBounds.add( destroyBullet, this );
