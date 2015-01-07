@@ -29,6 +29,8 @@ function deplacementBookmark(cpt, bookmarks) {
 function gameRestart() {
     enemies.getBookmarks().removeAll();
     bonus.getUpgradeItems().removeAll();
+    playerObject.getPlayer().kill();
+    playerObject.setScore(0);
 	game.paused = false;
     game.state.start('main');
 }
