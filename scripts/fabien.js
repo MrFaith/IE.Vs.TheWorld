@@ -11,7 +11,7 @@ function creationVagueBookmark(bookmarks) {
 }
 
 function deplacementBookmark(cpt, bookmarks) {
-	bookmarkboucle = this.game.time.events.add(600, function() {
+	bookmarkboucle = this.game.time.events.add(650, function() {
 		if(cpt > 0) {
 			var randomNumber = Math.floor((Math.random() * 600) + 30);
 
@@ -25,6 +25,26 @@ function deplacementBookmark(cpt, bookmarks) {
 		}
     }, this);
 }
+
+function launchGearsWave(cpt, paramsEnemies) {
+	var timer = Math.floor(Math.random() * 2000) + 400;
+	paramWave = this.game.time.events.add(timer, function() {
+		if(cpt > 0) {
+			var randomNumber = Math.floor((Math.random() * 600) + 30);
+            var gear = paramsEnemies.create(randomNumber, -5, 'gears');
+            //Animation
+	        gear.animations.add('Roll');
+			gear.animations.play('Roll', 6, true);
+            //Velocity
+			gear.anchor.setTo(0.5, 0.5);
+			gear.body.velocity.y = 200;
+			cpt--;
+			launchGearsWave(cpt, paramsEnemies);
+		} else {
+		}
+    }, this);
+}
+
 
 function gameRestart() {
     enemies.getBookmarks().removeAll();

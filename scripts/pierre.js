@@ -8,6 +8,16 @@ function killBookmarks(bullet, bookmark) {
 	varParameters.setScore(playerObject.getScore());
 }
 
+function killGears(bullet, gear) {
+
+	bingo(gear.body.x, gear.body.y, bonus ); //bonus is a global var
+	bullet.kill();
+	gear.kill();
+
+	playerObject.addScore(125);
+	varParameters.setScore(playerObject.getScore());
+}
+
 function enemyHits(something, enemy) {
 	enemy.kill();
 
@@ -40,7 +50,7 @@ function bingo(x, y, bonusItems){
 
 	nbRandom = Math.random();
 
-	if(nbRandom >= 0.50){
+	if(nbRandom >= 0.80){
 		bonusItems.createUpgradeItem(x, y);
 	}
 }

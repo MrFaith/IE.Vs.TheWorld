@@ -23,15 +23,13 @@
 
         preload: function() {
             // Everything in this function will be executed at the beginning. That’s where we usually load the game’s assets (images, sounds, etc.)
-            
-            
+                   
             game.stage.backgroundColor = '#fff';
 
             game.load.image('player', 'assets/ie1.png'); //IE 
             game.load.image('playerVersion2', 'assets/ie2.png');
             game.load.image('playerVersion3', 'assets/ie3.png');
             game.load.image('playerVersion4', 'assets/ie4.png');
-            game.load.image('bookmarks', 'assets/enemies/opera/bookmark.png') //Ennemy Favoris
             game.load.image('simpleBullets', 'assets/bullet1.png'); //Tir simple
             game.load.image('laser', 'assets/laser.png'); //Laser?
             game.load.spritesheet('fireBall', 'assets/firesprite.gif', 50, 80, 3);
@@ -44,6 +42,10 @@
             game.load.image('iebgVersion4', 'assets/background/ie/ieV4Background.png');
             game.load.image('operabg', 'assets/background/operaBackground.png');
             game.load.image('upgrade_player', 'assets/upgradeVersion.png');
+
+            //Ennemies
+            game.load.image('bookmarks', 'assets/enemies/opera/bookmark.png');
+            game.load.spritesheet('gears', 'assets/enemies/opera/engrenage.png', 20, 21,2);
         },
 
         create: function() { 
@@ -54,10 +56,12 @@
 
             //Groupe de favoris && Bonus
             enemies.initBookmarks();
+            enemies.initGears();
             bonus.initUpgrades();
 
             //création instance bookmark
             creationVagueBookmark(enemies.getBookmarks());
+            enemies.gearsWaveCreation();
                        
            
             //Initialisation de nos tirs
@@ -104,17 +108,17 @@
             //  Collisions !!!
             game.physics.arcade.collide(bullets.getSimpleBullets(), enemies.getBookmarks(), killBookmarks, null, this);
             game.physics.arcade.collide(bullets.getFireBalls(), enemies.getBookmarks(), killBookmarks, null, this);
+            game.physics.arcade.collide(bullets.getSimpleBullets(), enemies.getGears(), killGears, null, this);
+            game.physics.arcade.collide(bullets.getFireBalls(), enemies.getGears(), killGears, null, this);
 
+            //We are hit by enemy
             game.physics.arcade.collide(enemies.getBookmarks(), playerObject.getPlayer(), enemyHits, null, this);
             game.physics.arcade.collide(enemies.getBookmarks(), playerObject.getBackground(), enemyHits, null, this);
-            game.physics.arcade.collide(playerObject.getPlayer(), bonus.getUpgradeItems(), changeVersion, null, this);
+            game.physics.arcade.collide(enemies.getGears(), playerObject.getPlayer(), enemyHits, null, this);
+            game.physics.arcade.collide(enemies.getGears(), playerObject.getBackground(), enemyHits, null, this);
 
-            // Reset du jeu
-            /*if (resetButton.isDown)
-            {
-                game.paused = false;
-                gameRestart();
-            }*/
+            //Bonus
+            game.physics.arcade.collide(playerObject.getPlayer(), bonus.getUpgradeItems(), changeVersion, null, this);
         },
 
     }
