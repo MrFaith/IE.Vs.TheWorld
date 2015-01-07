@@ -119,4 +119,4 @@
     }
     // And finally we tell Phaser to add and start our 'main' state
     game.state.add('main', main_state);  
-    game.state.start('main'); 
+    //game.state.start('main'); 

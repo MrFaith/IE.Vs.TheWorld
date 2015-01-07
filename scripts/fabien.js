@@ -31,6 +31,11 @@ function gameRestart() {
     bonus.getUpgradeItems().removeAll();
     playerObject.getPlayer().kill();
     playerObject.setScore(0);
+    playerObject.setVersion(1);
 	game.paused = false;
     game.state.start('main');
+}
+
+function gameStart() {
+	game.state.start('main');
 }
