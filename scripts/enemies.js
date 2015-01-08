@@ -5,6 +5,7 @@ function Enemies() {
 	var bookmarks;
 	var gears;
 	var operaBoss;
+	var operaBossBullets;
 	var operaBossLife = 500;
 
 	return {
@@ -20,6 +21,9 @@ function Enemies() {
 		},
 		getOperaBoss : function(){
 			return operaBoss;
+		},
+		getOperaBossBullets : function(){
+			return operaBossBullets;
 		},
 		getOperaBossLife : function(){
 			return operaBossLife;
@@ -49,18 +53,27 @@ function Enemies() {
 		initOperaBoss : function() {
 			operaBoss = game.add.sprite(350, -40, 'operaBoss');
             game.physics.arcade.enable(operaBoss);
-            operaBoss.body.velocity.y += 300;
+            operaBoss.body.velocity.y += 350;
             var attack = operaBossAttack(operaBoss);
+
+            //Bullets
+            operaBossBullets = game.add.group();
+	       	operaBossBullets.enableBody = true;
+	        operaBossBullets.createMultiple(30, 'operaBossBullet');
+	        operaBossBullets.checkWorldBounds = true;
 		},
 
 		//ATTACKKK !!!
 		gearsWaveCreation : function() {
-			//Pour l'instant une seule création
-			var cpt = 0;
-			gears.forEach(function(){
-				cpt++;
-			}, this);
-			launchGearsWave(cpt,gears);
+			//On attends avant de lancer la vague.
+			setTimeout(function(){
+				var cpt = 0;
+				gears.forEach(function(){
+					cpt++;
+				}, this);
+				launchGearsWave(cpt,gears);
+			}, 5000);
+			
 		},
 
 	};

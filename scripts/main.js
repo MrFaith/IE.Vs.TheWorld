@@ -26,20 +26,22 @@
                    
             game.stage.backgroundColor = '#fff';
 
-            game.load.image('player', 'assets/ie1.png'); //IE 
+            //Player skin, bullets and background
+            game.load.image('player', 'assets/ie1.png'); 
             game.load.image('playerVersion2', 'assets/ie2.png');
             game.load.image('playerVersion3', 'assets/ie3.png');
             game.load.image('playerVersion4', 'assets/ie4.png');
-            game.load.image('simpleBullets', 'assets/bullet1.png'); //Tir simple
-            game.load.image('laser', 'assets/laser.png'); //Laser?
+            game.load.image('simpleBullets', 'assets/bullet1.png');
+            game.load.image('laser', 'assets/laser.png');
             game.load.spritesheet('fireBall', 'assets/firesprite.gif',49, 80, 4);
-
-            game.load.image('gameOver', 'assets/miscellaneous/game_over.png');
-            game.load.image('bonus', 'assets/miscellaneous/bonus.png');
             game.load.image('iebg', 'assets/background/ie/ie95Background.png');
             game.load.image('iebgVersion2', 'assets/background/ie/ieV2Background.png');
             game.load.image('iebgVersion3', 'assets/background/ie/ieV3Background.png');
             game.load.image('iebgVersion4', 'assets/background/ie/ieV4Background.png');
+
+
+            game.load.image('gameOver', 'assets/miscellaneous/game_over.png');
+            game.load.image('bonus', 'assets/miscellaneous/bonus.png');
             game.load.image('operabg', 'assets/background/operaBackground.png');
             game.load.image('upgrade_player', 'assets/upgradeVersion.png');
 
@@ -47,6 +49,7 @@
             game.load.image('bookmarks', 'assets/enemies/opera/bookmark.png');
             game.load.spritesheet('gears', 'assets/enemies/opera/engrenage.png', 20, 21, 2);
             game.load.spritesheet('operaBoss', 'assets/enemies/opera/operaBoss.png', 120, 110, 4);
+            game.load.image('operaBossBullet', 'assets/enemies/opera/bossBullet.png');
         },
 
         create: function() { 
@@ -61,9 +64,8 @@
             bonus.initUpgrades();
 
             //création instance bookmark
-            //creationVagueBookmark(enemies.getBookmarks());
-            //enemies.gearsWaveCreation();
-            enemies.initOperaBoss();         
+            creationVagueBookmark(enemies.getBookmarks());
+            enemies.gearsWaveCreation();        
            
             //Initialisation de nos tirs
             bullets.initSimpleBullets();
@@ -119,6 +121,7 @@
             game.physics.arcade.collide(enemies.getBookmarks(), playerObject.getBackground(), enemyHits, null, this);
             game.physics.arcade.collide(enemies.getGears(), playerObject.getPlayer(), enemyHits, null, this);
             game.physics.arcade.collide(enemies.getGears(), playerObject.getBackground(), enemyHits, null, this);
+            game.physics.arcade.collide(enemies.getOperaBossBullets(), playerObject.getPlayer(), enemyHits, null, this);
 
             //Bonus
             game.physics.arcade.collide(playerObject.getPlayer(), bonus.getUpgradeItems(), changeVersion, null, this);

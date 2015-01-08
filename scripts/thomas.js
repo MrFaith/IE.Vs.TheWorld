@@ -5,8 +5,8 @@ function shoot(player, bullets){
     if( bulletsAvailable == true ){
         switch(version){
             case 1:
-                //shootSimpleBullets(player);
-                shootFireBalls(player);
+                shootSimpleBullets(player);
+                //shootFireBalls(player);
                 break;
             case 2:
                 shootDoubleBullets(player);

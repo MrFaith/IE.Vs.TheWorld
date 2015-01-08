@@ -11,11 +11,16 @@ function bingo(x, y, bonusItems){
 
 function bigHitOperaBoss(operaBoss, fireBall){
 	fireBall.kill();
+	operaBoss.body.velocity.y = 00;
+	operaBoss.body.y = 80;
 	enemies.reduceOperaBossLife(5);
 }
 
 function changeVersion(player, upgradeLogo){
 	upgradeLogo.kill();
+	playerObject.addScore(75);
+	varParameters.setScore(playerObject.getScore());
+	
 	var version = playerObject.getVersion(); 
 	if(version < 4) {
 		playerObject.setVersion( version + 1 );	
@@ -73,6 +78,8 @@ function killGears(bullet, gear) {
 
 function smallHitOperaBoss(operaBoss, bullet){
 	bullet.kill();
+	operaBoss.body.velocity.y = 00;
+	operaBoss.body.y = 80;
 	enemies.reduceOperaBossLife(1);
 }
 

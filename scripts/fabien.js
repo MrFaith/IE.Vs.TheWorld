@@ -21,7 +21,7 @@ function deplacementBookmark(cpt, bookmarks) {
 			cpt--;
 			deplacementBookmark(cpt, bookmarks);
 		} else {
-
+			enemies.initOperaBoss(); 
 		}
     }, this);
 }
@@ -42,6 +42,13 @@ function gameStart() {
 	var id_start = document.getElementById('start');
 	id_start.parentNode.removeChild(id_start);
 }
+
+function killOperaBoss(operaBoss){
+	operaBoss.kill();
+	playerObject.addScore(10000);
+	varParameters.setScore(playerObject.getScore());
+}
+
 
 function launchGearsWave(cpt, paramsEnemies) {
 	var timer = Math.random() * 2000 + 400;
@@ -83,11 +90,24 @@ function operaBossMouvement(operaBoss){
 			operaBoss.body.velocity.x += 350;
 		}
 
+		//Attack
+		operaBossShoot(operaBoss);
+
 		console.log(enemies.getOperaBossLife());
 		//On check si toujours vivant
 		if(enemies.getOperaBossLife() > 0){
 			operaBossMouvement(operaBoss);
+		} else {
+			killOperaBoss(operaBoss);
 		}
 
 	}, 400);	
+}
+
+function operaBossShoot(operaBoss){
+	var bossXposition = operaBoss.body.x;
+	var bossYposition = operaBoss.body.y;
+	var bossBullet = enemies.getOperaBossBullets().create(bossXposition, bossYposition, 'operaBossBullet');
+    //Velocity
+	bossBullet.body.velocity.y = 750;
 }
