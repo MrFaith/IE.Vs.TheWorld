@@ -23,44 +23,55 @@
 
         preload: function() {
             // Everything in this function will be executed at the beginning. That’s where we usually load the game’s assets (images, sounds, etc.)
-            
-            
+                   
             game.stage.backgroundColor = '#fff';
 
-            game.load.image('player', 'assets/ie1.png'); //IE 
+            //Player skin, bullets and background
+            game.load.image('player', 'assets/ie1.png'); 
             game.load.image('playerVersion2', 'assets/ie2.png');
             game.load.image('playerVersion3', 'assets/ie3.png');
-            game.load.image('bookmarks', 'assets/enemies/opera/bookmark.png') //Ennemy Favoris
-            game.load.image('simpleBullets', 'assets/bullet1.png'); //Tir simple
-            game.load.image('laser', 'assets/laser.png'); //Tir simple
-
-            game.load.image('gameOver', 'assets/game_over.png');
+            game.load.image('playerVersion4', 'assets/ie4.png');
+            game.load.image('simpleBullets', 'assets/bullet1.png');
+            game.load.image('laser', 'assets/laser.png');
+            game.load.spritesheet('fireBall', 'assets/firesprite.gif',49, 80, 4);
             game.load.image('iebg', 'assets/background/ie/ie95Background.png');
             game.load.image('iebgVersion2', 'assets/background/ie/ieV2Background.png');
+            game.load.image('iebgVersion3', 'assets/background/ie/ieV3Background.png');
+            game.load.image('iebgVersion4', 'assets/background/ie/ieV4Background.png');
+
+
+            game.load.image('gameOver', 'assets/miscellaneous/game_over.png');
+            game.load.image('bonus', 'assets/miscellaneous/bonus.png');
             game.load.image('operabg', 'assets/background/operaBackground.png');
             game.load.image('upgrade_player', 'assets/upgradeVersion.png');
+            game.load.image('gameFinal', 'assets/miscellaneous/final.png');
+
+            //Ennemies
+            game.load.image('bookmarks', 'assets/enemies/opera/bookmark.png');
+            game.load.spritesheet('gears', 'assets/enemies/opera/engrenage.png', 20, 21, 2);
+            game.load.spritesheet('operaBoss', 'assets/enemies/opera/operaBoss.png', 120, 110, 4);
+            game.load.image('operaBossBullet', 'assets/enemies/opera/bossBullet.png');
         },
 
         create: function() { 
             game.physics.startSystem(Phaser.Physics.ARCADE);
             // This function will be called after the preload function. Here we set up the game, display sprites, add labels, etc.
-
-            // Affiche un sprite sur l'écran
-            playerObject.addSprite();
-
-            // Background Opera
-            operabg = game.add.sprite(0, 0, 'operabg');
+            playerObject.addSprite(); // Display Player sprite
+            operabg = game.add.sprite(0, 0, 'operabg'); // Background Opera
 
             //Groupe de favoris && Bonus
             enemies.initBookmarks();
+            enemies.initGears();
             bonus.initUpgrades();
 
             //création instance bookmark
-            creationVagueBookmark(enemies.getBookmarks());           
+            creationVagueBookmark(enemies.getBookmarks());
+            enemies.gearsWaveCreation(); 
+            enemies.initOperaBossBullets();       
            
-
-            //Initialisation de nos tirs de niveau 1 
+            //Initialisation de nos tirs
             bullets.initSimpleBullets();
+            bullets.initFireBalls();
 
             //Scoring And world
             varParameters.initScore();
@@ -75,7 +86,6 @@
 
         update: function() {
             // This is where we will spend the most of our time. This function is called 60 times per second to update the game.
-
             playerObject.defineVelocity(0,0);
             playerObject.getPlayer().body.y = 655;
 
@@ -100,22 +110,26 @@
                 shoot(playerObject, bullets);
             }
 
-            //  Collisions !!!
+            //We hit an enemy !!!
             game.physics.arcade.collide(bullets.getSimpleBullets(), enemies.getBookmarks(), killBookmarks, null, this);
+            game.physics.arcade.collide(bullets.getFireBalls(), enemies.getBookmarks(), killBookmarks, null, this);
+            game.physics.arcade.collide(bullets.getSimpleBullets(), enemies.getGears(), killGears, null, this);
+            game.physics.arcade.collide(bullets.getFireBalls(), enemies.getGears(), killGears, null, this);
+            game.physics.arcade.collide(bullets.getSimpleBullets(), enemies.getOperaBoss(), smallHitOperaBoss, null, this);
+            game.physics.arcade.collide(bullets.getFireBalls(), enemies.getOperaBoss(), bigHitOperaBoss, null, this);
+
+            //We are hit by enemy...
             game.physics.arcade.collide(enemies.getBookmarks(), playerObject.getPlayer(), enemyHits, null, this);
             game.physics.arcade.collide(enemies.getBookmarks(), playerObject.getBackground(), enemyHits, null, this);
+            game.physics.arcade.collide(enemies.getGears(), playerObject.getPlayer(), enemyHits, null, this);
+            game.physics.arcade.collide(enemies.getGears(), playerObject.getBackground(), enemyHits, null, this);
+            game.physics.arcade.collide(enemies.getOperaBossBullets(), playerObject.getPlayer(), enemyHits, null, this);
+
+            //Bonus
             game.physics.arcade.collide(playerObject.getPlayer(), bonus.getUpgradeItems(), changeVersion, null, this);
-
-            // Reset du jeu
-            /*if (resetButton.isDown)
-            {
-                game.paused = false;
-                gameRestart();
-            }*/
-
         },
 
     }
     // And finally we tell Phaser to add and start our 'main' state
-        game.state.add('main', main_state);  
-        game.state.start('main'); 
+    game.state.add('main', main_state);  
+    //game.state.start('main'); 

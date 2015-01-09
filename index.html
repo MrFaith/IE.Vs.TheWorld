@@ -14,13 +14,31 @@
         <script src="scripts/enemies.js"></script>
         <script src="scripts/bonus.js"></script>
         <script src="scripts/main.js"></script>
-		
+
+        <link href='http://fonts.googleapis.com/css?family=Play:400,700' rel='stylesheet' type='text/css'>		
 		<link type="text/css" href="web/css/stylePage.css" rel='stylesheet' media='screen'/> 
     </head>
 
-    
     <body>
-		<div id="game_div">
-		</div>
+
+        <img class="bg" alt="background" src="assets/background/background.png" />
+        <header>
+            <h1>
+                IE vs. The World
+            </h1>
+        </header>
+        
+		<div id="game_div"></div>
+        <img id="start" src="assets/miscellaneous/start.jpg" onclick="gameStart()" />
+
+        <div id="reset" onclick="gameRestart()" style="cursor: pointer;">
+            <h3> Reset </h3>
+            <img  src="assets/miscellaneous/reset.png">
+        </div>
+
+        <footer>
+            <p>Mensions légales - bLaBBlaBla.</p>
+            <p>Equipe: Soudier Fabien - Vallin Pierre - Rodrigues Thomas </p>
+        </footer>
     </body>
 </html>

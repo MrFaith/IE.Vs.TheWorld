@@ -38,8 +38,16 @@ function Player() {
 					background.loadTexture('iebg');
 					break;
 				case 2:
-					background.loadTexture('iebgVersion2');
 					ie.loadTexture('playerVersion2', 0, 0);
+					background.loadTexture('iebgVersion2');
+					break;
+				case 3:
+					ie.loadTexture('playerVersion3', 0, 0);
+					background.loadTexture('iebgVersion3');
+					break;
+				case 4:
+					ie.loadTexture('playerVersion4', 0, 0);
+					background.loadTexture('iebgVersion4');
 					break;
 			}
 		},

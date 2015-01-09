@@ -1,13 +1,102 @@
 html{
-	background: #C2E5F2;
+	
+	margin: 0px;
+	padding: 0px;
 }
 
 body{
-	padding:30px;
+	overflow-x: hidden;
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
 }
 
-#game_div{
-	border: 1px solid rgb(150,150,150);
+header, footer{
+	background-color: #000;
+	color: #CCC;
+	height: 70px;
+	padding: 5px;
+	text-align: center;
+	width: 100%;
+}
+header{
+	border-bottom: 2px solid #CCC;
+	font-family: "Play";
+
+	background-image: url(../../assets/miscellaneous/header.jpg);
+	background-repeat:  no-repeat;
+	background-position: right top;
+}
+footer{
+	border-top: 2px solid #CCC;
+	font-family: "Play";
+	margin: 0;
+}
+
+#game_div{	
+	display: inline-block;
 	margin: auto;
-	width:750px;
+	left: calc(50% - 375px);
+	padding: 5px;
+	position: relative;
+	width: 750px;
+}
+
+#start {
+	cursor: pointer;
+	left: calc(50% - 195px);
+	position: absolute;
+	top: 300px;
+}
+
+#reset{
+	background: black;
+	border: 2px solid #CCC;
+	display: none;
+	position:absolute;
+	right: -200px;
+	top:400px;
+	width: 300px;
+
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+
+#reset:hover{
+	transition: all 1s ease;
+	right:0px;
+}
+
+#reset h3{
+	color: #01cb56;
+	font-family: "Play";
+	font-size: 30px;
+	float: right;
+	margin: 20px 40px 0 -15px;
+
+}
+
+
+img.bg {
+  /* Set rules to fill background */
+  min-height: 100%;
+  min-width: 1024px;
+	
+  /* Set up proportionate scaling */
+  width: 100%;
+  height: auto;
+	
+  /* Set up positioning */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+@media screen and (max-width: 1024px) { /* Specific to this particular image */
+  img.bg {
+    left: 50%;
+    margin-left: -512px;   /* 50% */
+  }
 }
