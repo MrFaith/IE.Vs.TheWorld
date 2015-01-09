@@ -45,6 +45,7 @@ function gameStart() {
 	game.state.start('main');
 	var id_start = document.getElementById('start');
 	id_start.parentNode.removeChild(id_start);
+	document.getElementById('reset').style.display = 'block';
 }
 
 function killOperaBoss(operaBoss){
