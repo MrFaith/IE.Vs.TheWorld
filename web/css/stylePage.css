@@ -1,13 +1,63 @@
+@font-face {
+	font-family: "HaloSansLights";
+	src: url("HalloSans/filename.otf") format("opentype");
+}
+
 html{
 	background: #C2E5F2;
+	margin: 0px;
+	padding: 0px;
 }
 
 body{
-	padding:30px;
+	overflow-x: hidden;
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
 }
 
-#game_div{
+header, footer{
+	background: #EEE;
+	height: 70px;
+	padding: 5px;
+	width: 100%;
+}
+header{
+	border-bottom: 2px solid #CCC;
+}
+footer{
+	border-top: 2px solid #CCC;
+}
+
+h1{
+	text-align: center;
+}
+
+
+#game_div{	
 	border: 1px solid rgb(150,150,150);
+	display: inline-block;
 	margin: auto;
-	width:750px;
+	left: calc(50% - 375px);
+	padding: 5px;
+	position: relative;
+	width: 750px;
+}
+
+#start {
+	cursor: pointer;
+	left: calc(50% - 180px);
+	position: absolute;
+	top: 300px;
+}
+
+#reset{
+	border: 3px solid #BBB;
+	position:absolute;
+	right: 70px;
+	top:140px;
+}
+
+#reset:hover{
+	border-color: red;
 }
