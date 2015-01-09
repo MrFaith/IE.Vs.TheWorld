@@ -104,6 +104,12 @@ function operaBossMouvement(operaBoss){
 			operaBossMouvement(operaBoss);
 		} else {
 			killOperaBoss(operaBoss);
+
+			var gameFinal = game.add.sprite(250, 250, 'gameFinal');
+			bookmarks.removeAll();
+			currentBullets.removeAll();
+		    bonus.getUpgradeItems().removeAll();
+			game.paused = true;
 		}
 
 	}, 400);	

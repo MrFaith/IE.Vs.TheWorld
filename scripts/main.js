@@ -44,6 +44,7 @@
             game.load.image('bonus', 'assets/miscellaneous/bonus.png');
             game.load.image('operabg', 'assets/background/operaBackground.png');
             game.load.image('upgrade_player', 'assets/upgradeVersion.png');
+            game.load.image('gameFinal', 'assets/miscellaneous/final.png');
 
             //Ennemies
             game.load.image('bookmarks', 'assets/enemies/opera/bookmark.png');
