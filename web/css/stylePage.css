@@ -12,7 +12,8 @@ body{
 }
 
 header, footer{
-	background: #EEE;
+	background-color: #000;
+	color: #CCC;
 	height: 70px;
 	padding: 5px;
 	text-align: center;
@@ -21,6 +22,10 @@ header, footer{
 header{
 	border-bottom: 2px solid #CCC;
 	font-family: "Play";
+
+	background-image: url(../../assets/miscellaneous/header.jpg);
+	background-repeat:  no-repeat;
+	background-position: right top;
 }
 footer{
 	border-top: 2px solid #CCC;
@@ -45,15 +50,31 @@ footer{
 }
 
 #reset{
-	border: 3px solid #BBB;
+	background: black;
+	border: 2px solid #CCC;
 	display: none;
 	position:absolute;
-	right: 70px;
+	right: -200px;
 	top:400px;
+	width: 300px;
+
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
 }
 
 #reset:hover{
-	border-color: red;
+	transition: all 1s ease;
+	right:0px;
+}
+
+#reset h3{
+	color: #01cb56;
+	font-family: "Play";
+	font-size: 30px;
+	float: right;
+	margin: 20px 40px 0 -15px;
+
 }
 
 

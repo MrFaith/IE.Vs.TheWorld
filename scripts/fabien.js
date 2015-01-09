@@ -108,7 +108,7 @@ function operaBossMouvement(operaBoss){
 		} else {
 			killOperaBoss(operaBoss);
 
-			var gameFinal = game.add.sprite(250, 250, 'gameFinal');
+			var gameFinal = game.add.sprite(150, 250, 'gameFinal');
 			bookmarks.removeAll();
 			currentBullets.removeAll();
 		    bonus.getUpgradeItems().removeAll();

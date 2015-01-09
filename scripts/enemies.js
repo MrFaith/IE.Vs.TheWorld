@@ -6,7 +6,7 @@ function Enemies() {
 	var gears;
 	var operaBoss;
 	var operaBossBullets;
-	var operaBossLife = 500;
+	var operaBossLife = 350;
 
 	return {
 		//Getters
@@ -55,7 +55,9 @@ function Enemies() {
             game.physics.arcade.enable(operaBoss);
             operaBoss.body.velocity.y += 350;
             var attack = operaBossAttack(operaBoss);
+        },
 
+        initOperaBossBullets : function(){
             //Bullets
             operaBossBullets = game.add.group();
 	       	operaBossBullets.enableBody = true;

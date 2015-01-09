@@ -66,7 +66,8 @@
 
             //création instance bookmark
             creationVagueBookmark(enemies.getBookmarks());
-            enemies.gearsWaveCreation();        
+            enemies.gearsWaveCreation(); 
+            enemies.initOperaBossBullets();       
            
             //Initialisation de nos tirs
             bullets.initSimpleBullets();
