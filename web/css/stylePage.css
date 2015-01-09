@@ -1,15 +1,11 @@
-@font-face {
-	font-family: "HaloSansLights";
-	src: url("HalloSans/filename.otf") format("opentype");
-}
-
 html{
-	background: #C2E5F2;
+	
 	margin: 0px;
 	padding: 0px;
 }
 
 body{
+	background: black;
 	overflow-x: hidden;
 	margin: 0px;
 	padding: 0px;
@@ -20,22 +16,19 @@ header, footer{
 	background: #EEE;
 	height: 70px;
 	padding: 5px;
+	text-align: center;
 	width: 100%;
 }
 header{
 	border-bottom: 2px solid #CCC;
+	font-family: "Play";
 }
 footer{
 	border-top: 2px solid #CCC;
+	font-family: "Play";
 }
-
-h1{
-	text-align: center;
-}
-
 
 #game_div{	
-	border: 1px solid rgb(150,150,150);
 	display: inline-block;
 	margin: auto;
 	left: calc(50% - 375px);
@@ -46,16 +39,17 @@ h1{
 
 #start {
 	cursor: pointer;
-	left: calc(50% - 180px);
+	left: calc(50% - 195px);
 	position: absolute;
 	top: 300px;
 }
 
 #reset{
 	border: 3px solid #BBB;
+	display: none;
 	position:absolute;
 	right: 70px;
-	top:140px;
+	top:400px;
 }
 
 #reset:hover{
