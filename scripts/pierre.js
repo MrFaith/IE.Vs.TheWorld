@@ -55,6 +55,13 @@ function game_over( bookmarks, currentBullets) {
 	bookmarks.removeAll();
 	currentBullets.removeAll();
     bonus.getUpgradeItems().removeAll();
+    enemies.getGears().removeAll();
+
+    if (enemies.getOperaBoss() != null) {
+    	enemies.getOperaBoss().kill();
+    	enemies.getOperaBossBullets().removeAll();
+    }
+
 	game.paused = true;
 }
 

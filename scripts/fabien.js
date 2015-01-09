@@ -29,8 +29,11 @@ function deplacementBookmark(cpt, bookmarks) {
 function gameRestart() {
     enemies.getBookmarks().removeAll();
     enemies.getGears().removeAll();
-    enemies.getOperaBoss().kill();
-    enemies.getOperaBossBullets().removeAll();
+    
+    if (enemies.getOperaBoss() != null) {
+    	enemies.getOperaBoss().kill();
+    	enemies.getOperaBossBullets().removeAll();
+    }
 
     bonus.getUpgradeItems().removeAll();
     
