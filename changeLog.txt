@@ -12,3 +12,9 @@ Version 2
 - Creation of the upgrating system
 - Bugs correction
 ( + Code refactoring )
+
+Version 3
+- New enemies added
+- Two new versions of Internet Explorer
+- The first Boss
+- And more than that ;)
